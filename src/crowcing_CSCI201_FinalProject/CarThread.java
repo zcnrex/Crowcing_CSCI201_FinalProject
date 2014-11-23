@@ -11,7 +11,7 @@ public class CarThread extends Car implements Runnable
 	private int topSpeed, acceleration, handling, bombValue;
 	private String carName, bombName;
 */
-	private double currentTopSpeed;
+	private double currentTopSpeed; 
 	private double currentAcceleration;
 	private double currentHandling;
 	
