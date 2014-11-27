@@ -1,6 +1,7 @@
 package crowcing_CSCI201_FinalProject;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -72,6 +73,11 @@ public class CarChoosingPanel extends JPanel{
 		speedLabel.setBounds(50,350,(int)speedLabel.getPreferredSize().getWidth(), (int)speedLabel.getPreferredSize().getHeight());
 		accelerationLabel.setBounds(50,370,(int)accelerationLabel.getPreferredSize().getWidth(), (int)accelerationLabel.getPreferredSize().getHeight());
 		handlingLabel.setBounds(50,390,(int)handlingLabel.getPreferredSize().getWidth(), (int)handlingLabel.getPreferredSize().getHeight());
+		
+		/*MiniMapPanel miniMap=new MiniMapPanel(); ///for test only
+		miniMap.setPreferredSize(new Dimension(100, 100)); 
+		miniMap.setBounds(300,300,(int)miniMap.getPreferredSize().getWidth(), (int)miniMap.getPreferredSize().getHeight());
+		this.add(miniMap);*/
 		
 		class carListener implements ActionListener
 		{

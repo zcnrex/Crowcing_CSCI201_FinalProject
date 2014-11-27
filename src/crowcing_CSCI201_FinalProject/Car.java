@@ -16,13 +16,13 @@ public class Car {
 	}
 	
 	public Car(String carName){
-		this.carName = carName;
+		this.setCarName(carName);
 		this.carImg = new ImageIcon(carName + ".jpg");
 		this.rand = new Random();
 	}
 	
 	public Car(String carName, int topSpeed, int acceleration, int handling){
-		this.carName = carName;
+		this.setCarName(carName);
 		this.carImg = new ImageIcon(carName + ".jpg");
 		this.topSpeed = topSpeed;
 		this.acceleration = acceleration;
@@ -56,5 +56,13 @@ public class Car {
 	
 	public int getBombValue(){
 		return rand.nextInt(5);
+	}
+
+	public String getCarName() {
+		return carName;
+	}
+
+	public void setCarName(String carName) {
+		this.carName = carName;
 	}
 }

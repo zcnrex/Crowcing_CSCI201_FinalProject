@@ -1,11 +1,70 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.GridLayout;
+import java.util.Vector;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 //In charge of drawing MiniMap on left bottom corner of the screen
 public class MiniMapPanel extends JPanel implements Runnable{
 	
-	public void run(){
+	private Vector<Vector<Integer>> indexOfPosition;
+	
+	
+	
+	public MiniMapPanel()
+	{
+		this.setSize(100,100);
+		this.setLayout(new GridLayout(50,50));
+		this.setVisible(true);
+		
+		
+		
+	
+		
+		Map newMap=new Map("map.txt");
+		int map[][]=newMap.getMap();
+		JLabel label[][]=newMap.getLabel();
+		indexOfPosition=newMap.getIndexOfPosition();
+				
+		/*for (int i=0;i<50;i++)
+		{
+			for (int j=0;j<50;j++)
+			{
+				System.out.print(map[i][j]+" ");
+			}
+			System.out.println(i);
+		}
+		
+		System.out.println(label.length+"  "+label[49].length);*/
+		
+		for (int i=0;i<50;i++)
+		{
+			for (int j=0;j<50;j++)
+			{
+				label[i][j].setIcon(new DrawMap(map[i][j]));
+				MiniMapPanel.this.add(label[i][j]);
+			}
+			
+		}
+		
+	}
+	
+	public int distacePerLap()
+	{
+		return indexOfPosition.size();
+	}
+	
+	public Vector<Integer> currCoordinates(int totalDistanceTraveled)// vector[0]==y coordinates, vector[1]==x coordinates
+	{
+		int position=totalDistanceTraveled%indexOfPosition.size();
+		return indexOfPosition.get(position);
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		
 	}
 
