@@ -8,8 +8,17 @@ public class Test {
 	{
 		JFrame jf=new JFrame();
 		jf.setSize(800,600);
-		CarChoosingPanel choosePanel=new CarChoosingPanel();
-		jf.add(choosePanel);
+		LoginPanel lp = new LoginPanel();
+		jf.add(lp);
+//		while(true){
+//			if (lp.getDone()) {
+//				jf.remove(lp);
+//				CarChoosingPanel choosePanel=new CarChoosingPanel();
+//				jf.add(choosePanel);
+//				break;
+//			}
+//		}
+		
 		jf.setVisible(true);
 	}
 }
