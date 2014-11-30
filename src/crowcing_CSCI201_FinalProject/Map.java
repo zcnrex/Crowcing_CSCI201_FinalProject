@@ -163,7 +163,8 @@ public class Map {
 	public void setIndexOfPosition(Vector<Vector<Integer>> indexOfPosition) {
 		this.indexOfPosition = indexOfPosition;
 	}
-
+	
+	
 }
 
 
