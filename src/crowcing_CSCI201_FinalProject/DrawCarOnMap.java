@@ -22,10 +22,9 @@ public class DrawCarOnMap implements Icon {
 	int x=0;
 	
 	
-	public DrawCarOnMap(Tiles t,int index, List<Car> _car,int visible,int carNum)
+	public DrawCarOnMap(int index, List<Car> _car,int visible,int carNum)
 	{
-		this.degree=t.degree;
-		this.type=t.type;
+		
 		this.index=index;
 		this.car=_car;
 		this.visible=visible;
@@ -46,7 +45,7 @@ public class DrawCarOnMap implements Icon {
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-
+/*
 		 g.setColor(Color.CYAN);
 		    g.fillRect(x, y, getIconWidth(), getIconHeight());
 		    if (type!=0)
@@ -95,7 +94,7 @@ public class DrawCarOnMap implements Icon {
 		    	
 		   
 		    
-		   
+		   */
 		   // g.setColor(color);
 		    //g.fillRect(x + borderWidth, y + borderWidth, getIconWidth() - 2 * borderWidth,
 		       // getIconHeight() - 2 * borderWidth);

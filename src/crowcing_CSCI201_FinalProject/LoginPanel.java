@@ -1,5 +1,6 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -60,7 +61,7 @@ public class LoginPanel extends JPanel implements Runnable{
 
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Courier", Font.BOLD, 80));
-		g.drawString("Crowcing", 220, 50);
+		g.drawString("Crowcing", 220, 100);
 		drawError(g);
 	}
 	
@@ -113,7 +114,7 @@ public class LoginPanel extends JPanel implements Runnable{
 					changePanel(initialPanel, registerPanel);
 				}
 			});
-			existingUserButton = new JButton("Existing User");
+			existingUserButton = new JButton("Login");
 			existingUserButton.setBounds(450, 0, 100, 50);
 			existingUserButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent ae){
@@ -185,11 +186,16 @@ public class LoginPanel extends JPanel implements Runnable{
 			
 			loginButton = new JButton("Login");
 			loginButton.setBounds(250, 150, 100, 50);
-			loginButton.addActionListener(new ActionListener(){
+			
+			loginButton.addActionListener(new ActionListener()///change JPanel to CarChoosing Panel
+			{
 				public void actionPerformed(ActionEvent ae){
 //					changePanel(initialPanel, registerPanel);
+					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+					cl.show(Crowcing.outerPanel, "chooseCar");
 				}
 			});
+			
 			loginButton.addActionListener(new SendText(userNameField, passwordField, "Existing"));
 			System.out.println(userNameField.getText() +" "+ passwordField.getText());
 			backButton = new JButton("Back");

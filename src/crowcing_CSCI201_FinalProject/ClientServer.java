@@ -18,6 +18,10 @@ public class ClientServer {
 		}else if(selection.equals("Client")){
 			String IPServer = JOptionPane.showInputDialog("Enter the Server ip adress");
                         String[] arguments = new String[] {IPServer};
+                        for (int i=0;i<arguments.length;i++)
+                        {
+                        	System.out.println(arguments[i]+" "+arguments.length);
+                        }
 			new ChatClient().main(arguments);
 		}
 		
