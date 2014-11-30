@@ -1,5 +1,6 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -24,6 +25,7 @@ public class CarChoosingPanel extends JPanel{
 	private Car car[]=new Car[3];
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
+	public static Car chosenCar;
 	
 	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
 	
@@ -69,12 +71,17 @@ public class CarChoosingPanel extends JPanel{
 		
 		startButton.setBounds(650, 430,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
 		
+		
+		
 		startButton.addActionListener(new ActionListener()//actionListener for startButton
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				cl.show(Crowcing.outerPanel, "mainScreen");
+				chosenCar=car[carNumSelect];
 				System.out.println("Start car "+(carNumSelect+1));
 				
 			}

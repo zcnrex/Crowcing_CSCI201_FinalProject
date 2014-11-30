@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 //Doesn't share window with ChatPanel
 //Send input info to database and receive feedback
 public class LoginPanel extends JPanel implements Runnable{
+	public static String userName;
 	private JButton newUserButton, existingUserButton, registerButton, loginButton, backButton;
 	private JLabel userNameLabel, passwordLabel;
 	private JTextField userNameField, passwordField;
@@ -102,7 +103,29 @@ public class LoginPanel extends JPanel implements Runnable{
 		}
 		
 		public void actionPerformed(ActionEvent ae){
+			//gaidong
+			Database db = new Database(username.getText(), password.getText());
 
+			if(ae.getSource().equals(registerButton)){
+				if(db.checkRegister()==false){
+					error = "Username has been registered!";
+				}else{
+					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+					cl.show(Crowcing.outerPanel, "chooseCar");
+				}
+			}
+			if(ae.getSource().equals(loginButton)){
+				if(db.checkLogin()==1){
+					error = "Your username is incorrect!";
+				}else if(db.checkLogin()==2){
+					error = "Your password is incorrect!";
+				}else{
+					userName=username.getText();
+					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+					cl.show(Crowcing.outerPanel, "chooseCar");
+				}
+			}
+			
 			System.out.println(username.getText() +" "+ password.getText() +" "+ status);
 			username.setText("");
 			password.setText("");
@@ -235,14 +258,14 @@ public class LoginPanel extends JPanel implements Runnable{
 			loginButton = new JButton("Login");
 			loginButton.setBounds(250, 150, 100, 50);
 			
-			loginButton.addActionListener(new ActionListener()///change JPanel to CarChoosing Panel
-			{
-				public void actionPerformed(ActionEvent ae){
-//					changePanel(initialPanel, registerPanel);
-					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
-					cl.show(Crowcing.outerPanel, "chooseCar");
-				}
-			});
+//			loginButton.addActionListener(new ActionListener()///change JPanel to CarChoosing Panel
+//			{
+//				public void actionPerformed(ActionEvent ae){
+////					changePanel(initialPanel, registerPanel);
+//					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+//					cl.show(Crowcing.outerPanel, "chooseCar");
+//				}
+//			});
 			
 			loginButton.addActionListener(new SendText(userNameField, passwordField, "Existing"));
 			System.out.println(userNameField.getText() +" "+ passwordField.getText());

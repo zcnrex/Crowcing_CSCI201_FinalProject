@@ -13,7 +13,7 @@ public class Server {
 	private ArrayList<ServerThread> clientList;
 	private ArrayList<ServerThread> chatList;
 	private StringTokenizer st;
-	private static final ChatThread[] threads = new ChatThread[10];
+//	private static final ChatThread[] threads = new ChatThread[10];
 	
 	public Server(int port) {
 		clientList = new ArrayList<ServerThread>(); 
@@ -43,9 +43,9 @@ public class Server {
 	}
 	
 	public static void main(String [] args) {
-		//Server server = new Server(2222);
-        String[] arguments = new String[] {};
-        new ChatServer().main(arguments);
+		Server server = new Server(2232);
+//        String[] arguments = new String[] {};
+//        new ChatServer().main(arguments);
 	}
 	public void sendMessage(String message, ServerThread ct) {
 		for(ServerThread c : clientList) {

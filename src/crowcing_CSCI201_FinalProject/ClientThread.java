@@ -15,6 +15,9 @@ class ClientThread extends Thread {
 					
 					while(true){
 						String line = br.readLine();
+						if(line.substring(0, 1).equals("<")){
+							
+						}
 						if (!line.equals("-1")){
 //							fp.setYourStatus(line);
 						}
