@@ -40,8 +40,7 @@ public class DrawMap implements Icon {
 		    {
 		    	g.setColor(Color.BLACK);
 		    	g.fillRect(x, y, getIconWidth(),getIconHeight());
-		    	
-		    	
+		    
 		    }
 		
 

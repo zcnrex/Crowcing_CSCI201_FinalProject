@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 public class MiniMapPanel extends JPanel implements Runnable{
 	
 	private Vector<Vector<Integer>> indexOfPosition;
+	private int map[][];//the original data of map.txt
+	private JLabel label[][];//the GUI JLabel of every pixel, only used in MiniMapPanel 
 	
 	
 	
@@ -24,7 +26,7 @@ public class MiniMapPanel extends JPanel implements Runnable{
 	
 		
 		Map newMap=new Map("map.txt");
-		int map[][]=newMap.getMap();
+		map=newMap.getMap();
 		JLabel label[][]=newMap.getLabel();
 		indexOfPosition=newMap.getIndexOfPosition();
 				
@@ -61,6 +63,14 @@ public class MiniMapPanel extends JPanel implements Runnable{
 		int position=totalDistanceTraveled%indexOfPosition.size();
 		return indexOfPosition.get(position);
 	}
+	
+	public int currRoadType(int totalDistanceTraveled)// vector[0]==y coordinates, vector[1]==x coordinates
+	{
+		int position=totalDistanceTraveled%indexOfPosition.size();
+		int type=map[indexOfPosition.get(position).get(0)][indexOfPosition.get(position).get(1)];
+		return type;
+	}
+	
 
 	@Override
 	public void run() {
