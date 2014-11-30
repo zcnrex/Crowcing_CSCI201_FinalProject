@@ -47,7 +47,7 @@ public class DrawCarOnMap implements Icon {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
 
-		 g.setColor(Color.cyan);
+		 g.setColor(Color.CYAN);
 		    g.fillRect(x, y, getIconWidth(), getIconHeight());
 		    if (type!=0)
 		    {
@@ -63,27 +63,27 @@ public class DrawCarOnMap implements Icon {
 		    	
 		    		if (cc.color.equals("red"))
 		    		{
-		    			g.setColor(Color.red);
+		    			g.setColor(Color.RED);
 		    		}
 		    		else if (cc.color.equals("blue"))
 		    		{
-		    			g.setColor(Color.blue);
+		    			g.setColor(Color.BLUE);
 		    		}
 		    		else if (cc.color.equals("yellow"))
 		    		{
-		    			g.setColor(Color.yellow);
+		    			g.setColor(Color.YELLOW);
 		    		}
 		    		else if (cc.color.equals("orange"))
 		    		{
-		    			g.setColor(Color.orange);
+		    			g.setColor(Color.ORANGE);
 		    		}
 		    		else if (cc.color.equals("green"))
 		    		{
-		    			g.setColor(Color.green);
+		    			g.setColor(Color.GREEN);
 		    		}
 		    		g.drawOval(15, 15,30, 30);
 		    		g.fillOval(15, 15,30, 30);
-		    		g.setColor(Color.black);
+		    		g.setColor(Color.BLACK);
 		    		g.drawString(""+(carNum+1), 30, 30);
 
 		    }
