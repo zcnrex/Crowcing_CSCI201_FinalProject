@@ -94,11 +94,13 @@ public class ChatPanel extends JPanel implements Observer{
     
     
     public ChatPanel() {
-        String server = "localhost";
+//        String server = "localhost";
+        String server = "207.151.35.5";
         int port =2232;
        // ChatAccess access = null;
         try {
         	chatAccess = new ChatAccess(server, port);
+        	System.out.println("Ya");
         } catch (IOException ex) {
             System.out.println("Cannot connect to " + server + ":" + port);
             ex.printStackTrace();

@@ -28,7 +28,7 @@ public class LoginPanel extends JPanel implements Runnable{
 	private RegisterPanel registerPanel = new RegisterPanel();
 	private ExistingPanel existingPanel = new ExistingPanel();
 	
-	private Client client = new Client();
+//	private Client client = new Client();
 	private String error = "";
 	private boolean done = false;
 	
