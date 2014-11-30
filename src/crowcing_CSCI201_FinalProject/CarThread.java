@@ -13,7 +13,7 @@ import javax.swing.Timer;
 
 //Updates position of a car, 
 //consider speed, acceleration, handling, NO2, bombing
-public class CarThread extends Car implements Runnable
+public class CarThread extends Thread
 {
 	/*private ImageIcon carImg;
 	private int topSpeed, acceleration, handling, bombValue;
@@ -22,6 +22,7 @@ public class CarThread extends Car implements Runnable
 	private double currentTopSpeed; 
 	private double currentAcceleration;
 	private double currentHandling;
+	private double currentBottomSpeed;
 	private int index;
 
 	private int totalDistanceTraveled = 0;
@@ -30,18 +31,16 @@ public class CarThread extends Car implements Runnable
 	private Map map;
 	private int mapArray[][];
 	private Vector<Vector<Integer>> indexOfPosition;
-	private int currentSpeed = 0;
+	private double currentSpeed = 0;
 	
 	public CarThread(Car carInfo, int index)
 	{
-		this.setAcceleration(carInfo.getAcceleration());
-		this.setTopSpeed(carInfo.getTopSpeed());
-		this.setHandling(carInfo.getHandling());
+		this.currentAcceleration = carInfo.getAcceleration();
+		this.currentTopSpeed = carInfo.getTopSpeed()*4;
+		this.currentHandling = carInfo.getHandling();
+		this.currentBottomSpeed = currentHandling*2;
 		this.index = index;
 		
-		currentTopSpeed=(double)this.getTopSpeed();
-		currentAcceleration=(double)this.getAcceleration();
-		currentHandling=(double)this.getHandling();
 		map = new Map("map.txt");
 		mapArray = map.getMap();
 		indexOfPosition = map.getIndexOfPosition();
@@ -50,14 +49,35 @@ public class CarThread extends Car implements Runnable
 	@Override
 	public void run() {
 		while(totalDistanceTraveled<=indexOfPosition.size()){
-//			if(getRoadType()%2==1){
-//				if()
-//			}
 			
 			totalDistanceTraveled++;
+			if(totalDistanceTraveled>=indexOfPosition.size()){
+				//finish round
+				break;
+			}
 			positionx = map.getIndexOfPosition().get(totalDistanceTraveled).get(1);
 			positiony = map.getIndexOfPosition().get(totalDistanceTraveled).get(0);
-			//Thread.sleep()
+			
+			if(currentSpeed < currentBottomSpeed){
+				currentSpeed+=2;
+			} else if((getRoadType()%2) == (getPrevRoadType()%2)){ //on straight line
+				if(currentSpeed < currentTopSpeed){
+					currentSpeed+=2;
+				}
+			} else {
+				currentSpeed = currentBottomSpeed;
+			}
+			
+			
+			//For test
+			System.out.println(" Distance:" + totalDistanceTraveled + " x:" + positionx + " y:" + positiony);
+			System.out.println(" Speed:" + currentSpeed);
+			
+			try {
+				Thread.sleep((int)(5000/currentSpeed));
+			} catch (InterruptedException e) {
+				
+			}
 		}
 		
 		
@@ -102,6 +122,12 @@ public class CarThread extends Car implements Runnable
 	
 	public int getRoadType(){
 		int position=totalDistanceTraveled%indexOfPosition.size();
+		int type=mapArray[indexOfPosition.get(position).get(0)][indexOfPosition.get(position).get(1)];
+		return type;
+	}
+	
+	public int getPrevRoadType(){
+		int position=(totalDistanceTraveled-1)%indexOfPosition.size();
 		int type=mapArray[indexOfPosition.get(position).get(0)][indexOfPosition.get(position).get(1)];
 		return type;
 	}

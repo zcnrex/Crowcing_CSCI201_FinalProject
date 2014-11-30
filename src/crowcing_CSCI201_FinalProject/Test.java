@@ -33,7 +33,8 @@ public class Test {
 //		
 //
 //		jf.setVisible(true);
-		Car car1 = new Car("car1", 10, 2, 2);
+		Car car1 = new Car("car1", 7, 8, 9);
 		CarThread ct = new CarThread(car1, 1);
+		ct.run();
 	}
 }
