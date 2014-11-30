@@ -23,7 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 
-import crowcing_CSCI201_FinalProject.ChatClient.ChatAccess;
+//import crowcing_CSCI201_FinalProject.ChatClient.ChatAccess;
 
 //ChatPanel has a fixed position and size on the right of the screen
 public class ChatPanel extends JPanel implements Observer{
@@ -94,13 +94,12 @@ public class ChatPanel extends JPanel implements Observer{
     
     
     public ChatPanel() {
-//        String server = "localhost";
-        String server = "207.151.35.5";
+        String server = "localhost";
+//        String server = "10.120.112.100";
         int port =2232;
        // ChatAccess access = null;
         try {
         	chatAccess = new ChatAccess(server, port);
-        	System.out.println("Ya");
         } catch (IOException ex) {
             System.out.println("Cannot connect to " + server + ":" + port);
             ex.printStackTrace();
