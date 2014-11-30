@@ -4,9 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,20 +29,38 @@ public class LoginPanel extends JPanel implements Runnable{
 	
 	private Client client = new Client();
 	private String error = "";
+	private boolean done = false;
+	
+	private Car car = new Car();
 	
 	public LoginPanel(){
 		this.setSize(800, 600);
 		this.setLayout(null);
 //		initialPanel = new InitialPanel();
+		ImageIcon icon1 = new ImageIcon("car1.jpg");	
+		Image image1= icon1.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+//		ImageIcon icon1_1=new ImageIcon(image1);
+		
+		ImageIcon icon2 = new ImageIcon("car2.jpg");	
+		Image image2= icon2.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+//		ImageIcon icon1_2=new ImageIcon(image1);
+//		add(icon1);
+		
+//		g.drawImage(image1, 200, 200, null);
+//		g.drawImage(image2, 400, 200, null);
 		add(initialPanel);
 		
 	}
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+
+		
+		
+
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Courier", Font.BOLD, 80));
-		g.drawString("Crowcing", 220, 150);
+		g.drawString("Crowcing", 220, 50);
 		drawError(g);
 	}
 	
@@ -55,6 +75,10 @@ public class LoginPanel extends JPanel implements Runnable{
 		this.add(y);
 	}
 	
+	public boolean getDone(){
+		return done;
+	}
+	
 	class SendText implements ActionListener{
 		private JTextField username, password;
 		private String status;
@@ -63,6 +87,7 @@ public class LoginPanel extends JPanel implements Runnable{
 			this.username = username;
 			this.password = password;
 			this.status = status;
+			done = true;
 		}
 		
 		public void actionPerformed(ActionEvent ae){
