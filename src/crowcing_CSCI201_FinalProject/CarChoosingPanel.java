@@ -3,6 +3,7 @@ package crowcing_CSCI201_FinalProject;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,19 @@ public class CarChoosingPanel extends JPanel{
 	private Car car[]=new Car[3];
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
+	
+	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
+	
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
+		Image image= backgroundImage.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+		
+		
+		 g.drawImage(image, 0, 0, this);
+		
+	}
 	
 	public CarChoosingPanel()
 	{

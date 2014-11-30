@@ -28,6 +28,9 @@ public class LoginPanel extends JPanel implements Runnable{
 	private RegisterPanel registerPanel = new RegisterPanel();
 	private ExistingPanel existingPanel = new ExistingPanel();
 	
+	private ImageIcon backgroundImage= new ImageIcon("image/Forza.jpg");
+
+	
 //	private Client client = new Client();
 	private String error = "";
 	private boolean done = false;
@@ -37,6 +40,7 @@ public class LoginPanel extends JPanel implements Runnable{
 	public LoginPanel(){
 		this.setSize(800, 600);
 		this.setLayout(null);
+		this.setOpaque(true);
 //		initialPanel = new InitialPanel();
 		ImageIcon icon1 = new ImageIcon("car1.jpg");	
 		Image image1= icon1.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
@@ -49,6 +53,11 @@ public class LoginPanel extends JPanel implements Runnable{
 		
 //		g.drawImage(image1, 200, 200, null);
 //		g.drawImage(image2, 400, 200, null);
+		initialPanel.setOpaque(true);
+		registerPanel.setOpaque(true);
+		existingPanel.setOpaque(true);
+		
+
 		add(initialPanel);
 		
 	}
@@ -56,6 +65,7 @@ public class LoginPanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 
+		 g.drawImage(backgroundImage.getImage(), 0, 0, this);
 		
 		
 
@@ -103,10 +113,18 @@ public class LoginPanel extends JPanel implements Runnable{
 	
 	class InitialPanel extends JPanel{
 
+		public void paintComponent(Graphics g){
+			super.paintComponent(g);
+
+			 g.drawImage(backgroundImage.getImage(), 0, -300, this);
+			
+			
+		}
 
 		public InitialPanel(){
 			this.setLayout(null);
 			this.setBounds(0, 300, 800, 300);
+			this.setOpaque(true);
 			newUserButton = new JButton("New User");
 			newUserButton.setBounds(250, 0, 100, 50);
 			newUserButton.addActionListener(new ActionListener(){
@@ -129,12 +147,27 @@ public class LoginPanel extends JPanel implements Runnable{
 	
 	class RegisterPanel extends JPanel{
 		
+		public void paintComponent(Graphics g){
+			super.paintComponent(g);
+
+			 g.drawImage(backgroundImage.getImage(), 0, -250, this);
+			
+			
+		}
+		
 		public RegisterPanel(){
 			this.setLayout(null);
 			this.setBounds(0, 250, 800, 300);
+			this.setOpaque(true);
 			
 			userNameLabel = new JLabel("User Name: ");
+			userNameLabel.setFont(new Font("Dialog",   1,   17));
+			userNameLabel.setForeground(Color.WHITE);
+			
 			passwordLabel = new JLabel("Password: ");
+			passwordLabel.setForeground(Color.WHITE);
+			passwordLabel.setFont(new Font("Dialog",   1,   17));
+			
 			userNameLabel.setBounds(200, 0, 100, 40);
 			passwordLabel.setBounds(200, 50, 100, 40);
 
@@ -170,12 +203,27 @@ public class LoginPanel extends JPanel implements Runnable{
 	
 	class ExistingPanel extends JPanel{
 		
+		public void paintComponent(Graphics g){
+			super.paintComponent(g);
+
+			 g.drawImage(backgroundImage.getImage(), 0, -250, this);
+			
+			
+		}
+		
 		public ExistingPanel(){
 			this.setLayout(null);
 			this.setBounds(0, 250, 800, 300);
+			this.setOpaque(true);
 
 			userNameLabel = new JLabel("User Name: ");
+			userNameLabel.setFont(new Font("Dialog",   1,   17));
+			userNameLabel.setForeground(Color.WHITE);
+			
 			passwordLabel = new JLabel("Password: ");
+			passwordLabel.setForeground(Color.WHITE);
+			passwordLabel.setFont(new Font("Dialog",   1,   17));
+			
 			userNameLabel.setBounds(200, 0, 100, 50);
 			passwordLabel.setBounds(200, 50, 100, 50);
 			
