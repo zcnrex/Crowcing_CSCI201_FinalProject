@@ -59,9 +59,9 @@ public class CarChoosingPanel extends JPanel{
 			//car[i]=new Car("car"+((i+1)+""),i+1,i+2,i+3);
 		}
 		
-		car[0]=new Car("car"+(1+""),3,4,5);
-		car[1]=new Car("car"+(2+""),4,5,3);
-		car[2]=new Car("car"+(3+""),5,3,4);
+		car[0]=new Car("car"+(1+""),7,8,9);
+		car[1]=new Car("car"+(2+""),8,9,7);
+		car[2]=new Car("car"+(3+""),9,7,8);
 		
 		
 		JButton startButton=new JButton("start");//set up start button
