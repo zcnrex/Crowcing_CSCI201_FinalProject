@@ -1,6 +1,7 @@
 package crowcing_CSCI201_FinalProject;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 //Main class for client that setup window and go through all phases
 //We also need JMenu
@@ -19,8 +20,11 @@ public class Crowcing extends JFrame{
 		add(loginPanel);
 		
 		
-		
-		
+		//result panel
+		/*
+		JPanel result = new ResultPanel(2, 3, 4);
+		add(result);
+		*/
 		setVisible(true);
 	}
 	
