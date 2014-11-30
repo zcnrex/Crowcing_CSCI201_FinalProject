@@ -18,12 +18,12 @@ public class Client {
 	private PrintWriter pw;
 	public Client( String hostname, int port ) {
 		try {
-			s = new Socket ("127.0.0.1", port );
+			s = new Socket (hostname, port );
 			pw = new PrintWriter( s.getOutputStream() );
 			br= new BufferedReader( new InputStreamReader(s.getInputStream() ) );
 //			cp = new FightPanel(pw);
-//			ClientThread ct = new ClientThread();
-//			ct.start();
+			ClientThread ct = new ClientThread(br);
+			ct.start();
 		} catch (IOException ioe) {
 			System.out.println( "IOExceptionin Client constructor: " + ioe.getMessage() );
 		}

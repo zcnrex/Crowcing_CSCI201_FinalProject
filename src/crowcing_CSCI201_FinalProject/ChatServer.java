@@ -11,7 +11,7 @@ public class ChatServer {
 	private static ServerSocket serverSocket = null;
 	private static Socket clientSocket = null;
 	private static final int maxClientsCount = 10;
-	private static final ClientThread[] threads = new ClientThread[maxClientsCount];
+	private static final ChatThread[] threads = new ChatThread[maxClientsCount];
 
 	public static void main(String args[]) {
 
@@ -29,7 +29,7 @@ public class ChatServer {
 		    int i = 0;
 		    for (i = 0; i < maxClientsCount; i++) {
 		    	if (threads[i] == null) {
-		    		(threads[i] = new ClientThread(clientSocket, threads)).start();
+		    		(threads[i] = new ChatThread(clientSocket, threads)).start();
 		        break;
 		    	}
 		    }

@@ -23,7 +23,7 @@ public class Crowcing extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		
+		Client client = new Client("10.120.71.144", 2222);
 		
 		
 		outerPanel.setLayout(new CardLayout());
