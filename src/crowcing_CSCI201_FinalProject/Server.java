@@ -43,7 +43,7 @@ public class Server {
 	}
 	
 	public static void main(String [] args) {
-		Server server = new Server(2222);
+		//Server server = new Server(2222);
         String[] arguments = new String[] {};
         new ChatServer().main(arguments);
 	}

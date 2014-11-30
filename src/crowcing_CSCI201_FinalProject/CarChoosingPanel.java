@@ -31,10 +31,10 @@ public class CarChoosingPanel extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 
-		Image image= backgroundImage.getImage().getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+		Image image= backgroundImage.getImage().getScaledInstance(800, 560, Image.SCALE_SMOOTH);
+		ImageIcon background= new ImageIcon(image);
 		
-		
-		 g.drawImage(image, 0, 0, this);
+		 g.drawImage(background.getImage(), 0, 0, this);
 		
 	}
 	
@@ -56,11 +56,18 @@ public class CarChoosingPanel extends JPanel{
 			carButton[i]=new JButton(icon1);
 			carButton[i].setBounds(50+i*250, 200, 200, 100);
 			
-			car[i]=new Car("car"+((i+1)+""),i+1,i+2,i+3);
+			//car[i]=new Car("car"+((i+1)+""),i+1,i+2,i+3);
 		}
 		
+		car[0]=new Car("car"+(1+""),3,4,5);
+		car[1]=new Car("car"+(2+""),4,5,3);
+		car[2]=new Car("car"+(3+""),5,3,4);
+		
+		
 		JButton startButton=new JButton("start");//set up start button
-		startButton.setBounds(600, 450,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
+		startButton.setPreferredSize(new Dimension(80,60));
+		
+		startButton.setBounds(650, 430,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
 		
 		startButton.addActionListener(new ActionListener()//actionListener for startButton
 		{
