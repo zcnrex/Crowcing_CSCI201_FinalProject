@@ -21,12 +21,13 @@ public class ResultPanel extends JPanel{
 	private JLabel JLbestLap;
 	private JLabel JLtotalLap;
 	private JLabel backgroundLabel;
-	private int rank;
-	private int laptime;
+	private String rank;
+	private String lapTime;
 	private JOptionPane newRecord;
 	private ImageIcon backgroundImage= new ImageIcon("image/RedBull.jpg");
 	
-	public ResultPanel(int finalRank, int bestLap, int totalLap){
+//	public ResultPanel(int finalRank, int bestLap, int totalLap){
+		public ResultPanel(){
 		setSize(800,600);
 		setLayout(null);
 //		backgroundLabel = new JLabel();
@@ -36,7 +37,7 @@ public class ResultPanel extends JPanel{
 //		add(backgroundLabel);
 		repaint();
 		
-		JLfinalRank = new JLabel("Final Rank: " + String.valueOf(finalRank));
+		JLfinalRank = new JLabel("Final Rank: " + String.valueOf(rank));
 		JLfinalRank.setForeground(Color.WHITE);
 		JLfinalRank.setBackground(Color.BLACK);
 		JLfinalRank.setOpaque(true);
@@ -44,7 +45,7 @@ public class ResultPanel extends JPanel{
 		JLfinalRank.setBounds(300, 120, 200, 30);
 		add(JLfinalRank);
 		
-		JLbestLap = new JLabel("Best Lap Time: " + String.valueOf(bestLap));
+		JLbestLap = new JLabel("Best Lap Time: " + lapTime);
 		JLbestLap.setForeground(Color.WHITE);
 		JLbestLap.setBackground(Color.BLACK);
 		JLbestLap.setOpaque(true);
@@ -52,7 +53,7 @@ public class ResultPanel extends JPanel{
 		JLbestLap.setBounds(300, 180, 250, 30);
 		add(JLbestLap);
 		
-		JLtotalLap = new JLabel("Total Lap Time: " + String.valueOf(totalLap));
+		JLtotalLap = new JLabel("Total Lap Time: " + String.valueOf(1));
 		JLtotalLap.setForeground(Color.WHITE);
 		JLtotalLap.setBackground(Color.BLACK);
 		JLtotalLap.setOpaque(true);
@@ -73,6 +74,7 @@ public class ResultPanel extends JPanel{
 		JBrematch.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				
 				cl.show(Crowcing.outerPanel, "chooseCar");
 				//call carChoosingPanel
 			}
@@ -86,5 +88,13 @@ public class ResultPanel extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		g.drawImage(backgroundImage.getImage(), 0, 0, this);
+	}
+	
+	public void setFinalRank(String rank){
+		this.rank = rank;
+	}
+	
+	public void setLapTime(String lapTime){
+		this.lapTime = lapTime;
 	}
 }
