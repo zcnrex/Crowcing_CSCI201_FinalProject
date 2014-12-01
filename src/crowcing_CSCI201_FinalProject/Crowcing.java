@@ -15,6 +15,7 @@ public class Crowcing extends JFrame{
 	private LoginPanel loginPanel = new LoginPanel();
 	public static CarChoosingPanel choosePanel;//=new CarChoosingPanel();
 	public static ResultPanel resultPanel=new ResultPanel();
+	//public static String finalRank;
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
 	
 	private JLayeredPane lp = null;//Override miniMap an racingPanel
