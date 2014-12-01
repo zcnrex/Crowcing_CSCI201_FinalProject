@@ -1,8 +1,10 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +25,20 @@ public class CarChoosingPanel extends JPanel{
 	private Car car[]=new Car[3];
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
+	public static Car chosenCar=null;
+	
+	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
+	
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+
+		Image image= backgroundImage.getImage().getScaledInstance(800, 560, Image.SCALE_SMOOTH);
+		ImageIcon background= new ImageIcon(image);
+		
+		 g.drawImage(background.getImage(), 0, 0, this);
+		
+	}
 	
 	public CarChoosingPanel()
 	{
@@ -35,18 +51,27 @@ public class CarChoosingPanel extends JPanel{
 		
 		for (int i=0;i<3;i++)//set imageIcon and absolute location of the button	
 		{
-			ImageIcon icon = new ImageIcon("car"+((1+i)+"")+".jpg");	
+			ImageIcon icon = new ImageIcon("image/car"+((1+i)+"")+".png");	
 			Image image= icon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon1=new ImageIcon(image);
 			
 			carButton[i]=new JButton(icon1);
 			carButton[i].setBounds(50+i*250, 200, 200, 100);
 			
-			car[i]=new Car("car"+((i+1)+""),i+1,i+2,i+3);
+			//car[i]=new Car("car"+((i+1)+""),i+1,i+2,i+3);
 		}
 		
+		car[0]=new Car("car"+(1+""),7,8,9);
+		car[1]=new Car("car"+(2+""),8,9,7);
+		car[2]=new Car("car"+(3+""),9,7,8);
+		
+		
 		JButton startButton=new JButton("start");//set up start button
-		startButton.setBounds(600, 450,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
+		startButton.setPreferredSize(new Dimension(80,60));
+		
+		startButton.setBounds(650, 430,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
+		
+		
 		
 		startButton.addActionListener(new ActionListener()//actionListener for startButton
 		{
@@ -54,6 +79,16 @@ public class CarChoosingPanel extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				cl.show(Crowcing.outerPanel, "mainScreen");
+				MainScreenPanel.miniMapPanel.setVisible(true);
+				MainScreenPanel.chatPanel.setVisible(true);
+				
+				chosenCar=car[carNumSelect];
+				Thread t1=new Thread(MainScreenPanel.miniMapPanel);
+				t1.start();
+				Thread t2=new Thread(MainScreenPanel.racingPanel);
+				t2.start();
 				System.out.println("Start car "+(carNumSelect+1));
 				
 			}

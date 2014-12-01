@@ -147,12 +147,18 @@ public class ChatPanel extends JPanel implements Observer{
         // Action for the inputTextField and the goButton
         ActionListener sendListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+             	String userName=LoginPanel.userName;
+            	System.out.println(userName+"  1111");
                 String str = inputTextField.getText();
                 if (str != null && str.trim().length() > 0)
-                    chatAccess.send(str);
+                	//gaidong
+                    chatAccess.send("<"+userName+">: "  + str);
                 inputTextField.selectAll();
                 inputTextField.requestFocus();
                 inputTextField.setText("");
+                textArea.append("<"+userName+">: "  + str);
+                textArea.append("\n");
+
             }
         };
         inputTextField.addActionListener(sendListener);
@@ -171,8 +177,12 @@ public class ChatPanel extends JPanel implements Observer{
         final Object finalArg = arg;
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                textArea.append(finalArg.toString());
-                textArea.append("\n");
+            	//gaidong
+            	String line = finalArg.toString();
+            	if(line.substring(0,1).equals("<")){
+	                textArea.append(line);
+	                textArea.append("\n");
+            	}
             }
         });
     }

@@ -12,7 +12,8 @@ public class MiniMapPanel extends JPanel implements Runnable{
 	private Vector<Vector<Integer>> indexOfPosition;
 	private int map[][];//the original data of map.txt
 	private JLabel label[][];//the GUI JLabel of every pixel, only used in MiniMapPanel 
-	
+	//private CarThread selfCar=new CarThread(CarChoosingPanel.chosenCar,1);
+	//private CarThread selfCar;
 	
 	
 	public MiniMapPanel()
@@ -21,13 +22,13 @@ public class MiniMapPanel extends JPanel implements Runnable{
 		this.setLayout(new GridLayout(50,50));
 		this.setVisible(true);
 		
-		
-		
-	
+//		
+//		Car car=new Car("car"+(1+""),7,8,9);
+//		CarThread selfCar=new CarThread(car,1);
 		
 		Map newMap=new Map("map.txt");
 		map=newMap.getMap();
-		JLabel label[][]=newMap.getLabel();
+		label=newMap.getLabel();
 		indexOfPosition=newMap.getIndexOfPosition();
 				
 		/*for (int i=0;i<50;i++)
@@ -50,6 +51,10 @@ public class MiniMapPanel extends JPanel implements Runnable{
 			}
 			
 		}
+		
+		
+		
+		//selfCar.start();
 		
 	}
 	
@@ -74,7 +79,58 @@ public class MiniMapPanel extends JPanel implements Runnable{
 
 	@Override
 	public void run() {
+		
+		//Car car=new Car("car"+(1+""),7,8,9);
+		//Car car=new Car("car"+(2+""),8,9,7);
+		//Car car=new Car("car"+(3+""),9,7,8);
+		
+		//selfCar=new CarThread(car,1);
+		CarThread selfCar=new CarThread(CarChoosingPanel.chosenCar,1);
+		selfCar.start();
+		try {
+			Thread.sleep(50);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
+		//System.out.println(selfCar.getTotalDistanceTraveled()+" **** "+distacePerLap());
+		while (selfCar.getTotalDistanceTraveled()<distacePerLap())
+		{
+			int x=selfCar.getPositionX();
+			int y=selfCar.getPositionY();
+			System.out.println(x+" **** "+y);
+			System.out.println(map[y][x]+" **** "+selfCar.getCarName()+"  "+label.length);
+			
+			label[y][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x],1));
+			label[y][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x+1],1));
+			label[y+1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x],1));
+			label[y-1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x],1));
+			label[y][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x-1],1));
+			label[y-1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x-1],1));
+			label[y+1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x+1],1));
+			label[y+1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x-1],1));
+			label[y-1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x+1],1));
+			
+			int sleepTime=(int)(5000/selfCar.getCurrentSpeed());
+			try {
+				Thread.sleep(sleepTime);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			label[y][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x],0));
+			label[y][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x+1],0));
+			label[y+1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x],0));
+			label[y-1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x],0));
+			label[y][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x-1],0));
+			label[y-1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x-1],0));
+			label[y+1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x+1],0));
+			label[y+1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x-1],0));
+			label[y-1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x+1],0));
+			
+		}
 		
 	}
 

@@ -3,6 +3,7 @@ package crowcing_CSCI201_FinalProject;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 //Main class for client that setup window and go through all phases
@@ -14,7 +15,7 @@ public class Crowcing extends JFrame{
 	private CarChoosingPanel choosePanel=new CarChoosingPanel();
 	private ResultPanel resultPanel=new ResultPanel(1,1,1);
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
-	
+	private JLayeredPane lp = null;
 	
 	public Crowcing(){
 		super("Crowcing");
@@ -23,16 +24,23 @@ public class Crowcing extends JFrame{
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Client client = new Client("10.120.71.144", 2222);
 		
-		
+		lp = this.getLayeredPane(); 
 		
 		outerPanel.setLayout(new CardLayout());
 		
-//		outerPanel.add(loginPanel, "login");
-//		outerPanel.add(choosePanel, "chooseCar");
-//		outerPanel.add(resultPanel,"result");
+		outerPanel.add(loginPanel, "login");
+		outerPanel.add(choosePanel, "chooseCar");
+		outerPanel.add(resultPanel,"result");
 		outerPanel.add(mainScreenPanel,"mainScreen");
 		
+		lp.add(outerPanel, new Integer(200));
+		lp.add(MainScreenPanel.miniMapPanel, new Integer(300));
+		lp.add(MainScreenPanel.chatPanel, new Integer(500));
+		MainScreenPanel.miniMapPanel.setVisible(false);
+		MainScreenPanel.chatPanel.setVisible(false);
+		outerPanel.setVisible(true);
 		
 		Thread t = new Thread(loginPanel);
 		t.start();
