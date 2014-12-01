@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 //Constantly changing background to indicate moving
 public class RacingPanel extends JPanel implements Runnable{
 	private Car car = new Car("car"+(1+""),7,8,9);
-	private CarThread carThread = new CarThread(car, 1);
+	private CarThread carThread;// = new CarThread(car, 1);
 	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
 	private int[] position = new int[2], prevPosition = new int[2];
@@ -203,7 +203,8 @@ public class RacingPanel extends JPanel implements Runnable{
 		}
 
 		type = mapPosition[position[0]][position[1]];
-		ImageIcon carImg = new ImageIcon("car/car1-" + type + ".png");
+		String carName=carThread.getCarName();
+		ImageIcon carImg = new ImageIcon("car/"+carName+"-" + type + ".png");
 //		Image ca = carImg.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
 //		ImageIcon carImg = new ImageIcon("car/car1-" + type + ".png");
 		int size = (int) (len/2*1.5);
@@ -235,6 +236,8 @@ public class RacingPanel extends JPanel implements Runnable{
 		}
 	}
 	public void run(){
+	    carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
+		carThread.start();
 		while(true){
 			repaint();
 			try {

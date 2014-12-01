@@ -51,7 +51,7 @@ public class CarChoosingPanel extends JPanel{
 		
 		for (int i=0;i<3;i++)//set imageIcon and absolute location of the button	
 		{
-			ImageIcon icon = new ImageIcon("car"+((1+i)+"")+".jpg");	
+			ImageIcon icon = new ImageIcon("image/car"+((1+i)+"")+".png");	
 			Image image= icon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
 			ImageIcon icon1=new ImageIcon(image);
 			
@@ -81,10 +81,14 @@ public class CarChoosingPanel extends JPanel{
 				// TODO Auto-generated method stub
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "mainScreen");
+				MainScreenPanel.miniMapPanel.setVisible(true);
+				MainScreenPanel.chatPanel.setVisible(true);
 				
 				chosenCar=car[carNumSelect];
-				Thread t=new Thread(MainScreenPanel.miniMapPanel);
-				t.start();
+				Thread t1=new Thread(MainScreenPanel.miniMapPanel);
+				t1.start();
+				Thread t2=new Thread(MainScreenPanel.racingPanel);
+				t2.start();
 				System.out.println("Start car "+(carNumSelect+1));
 				
 			}
