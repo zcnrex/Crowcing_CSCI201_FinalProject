@@ -13,7 +13,7 @@ public class Crowcing extends JFrame{
 	
 	private LoginPanel loginPanel = new LoginPanel();
 	public static CarChoosingPanel choosePanel;//=new CarChoosingPanel();
-	private ResultPanel resultPanel=new ResultPanel(1,1,1);
+	private static ResultPanel resultPanel=new ResultPanel();
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
 	private JLayeredPane lp = null;
 	
@@ -55,6 +55,10 @@ public class Crowcing extends JFrame{
 		add(result);
 		*/
 		setVisible(true);
+	}
+	
+	public static ResultPanel getResultPanel(){
+		return resultPanel;
 	}
 	
 	
