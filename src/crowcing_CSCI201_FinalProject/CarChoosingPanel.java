@@ -64,7 +64,7 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 		//pw.println(" are using car"+(carNumSelect+1)); 
 		Socket s;
 		try {
-			s = new Socket("localhost", 2232);
+			s = new Socket(Crowcing.ipAdress, 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			pw = new PrintWriter(s.getOutputStream());
 		} catch (IOException e1) {
