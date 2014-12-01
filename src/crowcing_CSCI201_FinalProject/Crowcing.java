@@ -14,7 +14,7 @@ public class Crowcing extends JFrame{
 	
 	private LoginPanel loginPanel = new LoginPanel();
 	public static CarChoosingPanel choosePanel;//=new CarChoosingPanel();
-	private static ResultPanel resultPanel=new ResultPanel();
+	public static ResultPanel resultPanel=new ResultPanel();
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
 	
 	private JLayeredPane lp = null;//Override miniMap an racingPanel
@@ -63,10 +63,7 @@ public class Crowcing extends JFrame{
 		setVisible(true);
 	}
 	
-	public static ResultPanel getResultPanel(){
-		return resultPanel;
-	}
-	
+
 	
 	public static void main(String[] args) {
 		System.out.println("IP address for server:");

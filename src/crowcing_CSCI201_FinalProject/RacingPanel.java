@@ -300,9 +300,12 @@ public class RacingPanel extends JPanel implements Runnable{
 			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
 				MainScreenPanel.chatPanel.setVisible(false);
 				MainScreenPanel.miniMapPanel.setVisible(false);
-				Crowcing.getResultPanel().setLapTime(s.getLapTime());
-				Crowcing.getResultPanel().setFinalRank(s.getRank());
-				Crowcing.getResultPanel().repaint();
+				
+				System.out.println(s.getLapTime()+" 111  "+s.getRank());
+				
+				Crowcing.resultPanel.setLapTime(s.getLapTime());
+				Crowcing.resultPanel.setFinalRank(s.getRank());
+				Crowcing.resultPanel.repaint();
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
 				break;
