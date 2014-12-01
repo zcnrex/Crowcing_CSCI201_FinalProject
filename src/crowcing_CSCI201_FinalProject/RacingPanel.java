@@ -17,6 +17,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private CarThread carThread;
 	//private Car car2 = new Car("car"+(2+""),7,8,9);
 	private CarThread carThread2;// = new CarThread(car2, 1);
+	private BombThread bombThread;
 	
 	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
@@ -319,6 +320,12 @@ public class RacingPanel extends JPanel implements Runnable{
 			s = new Statistics(carThread2, carThread,map);
 		}
 		
+
+		bombThread = new BombThread();
+		bombThread.start();
+		
+		s = new Statistics(carThread, carThread2,map);
+
 		s.start();
 		while(true){
 			repaint();
@@ -337,6 +344,9 @@ public class RacingPanel extends JPanel implements Runnable{
 				System.out.println("Finsh");
 				MainScreenPanel.chatPanel.setVisible(false);
 				MainScreenPanel.miniMapPanel.setVisible(false);
+
+				Crowcing.bomb.setVisible(false);
+
 				Crowcing.resultPanel.setLapTime(s.getLapTime());
 //				System.out.println("Rank: " + s.getRank());
 				Crowcing.resultPanel.repaint();
@@ -354,15 +364,13 @@ public class RacingPanel extends JPanel implements Runnable{
 //				System.out.println("Rank: " + s.getRank());
 				Crowcing.resultPanel.repaint();
 //				Crowcing.resultPanel
-				
-				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
-				cl.show(Crowcing.outerPanel, "result");
-				
-				break;
+
 			}
 				//finish round
 				
 			
 		}
 	}
+	
+
 }
