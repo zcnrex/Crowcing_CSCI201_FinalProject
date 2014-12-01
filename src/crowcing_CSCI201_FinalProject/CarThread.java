@@ -2,6 +2,11 @@ package crowcing_CSCI201_FinalProject;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 import java.util.Vector;
 
 import javax.swing.ImageIcon;
@@ -34,6 +39,9 @@ public class CarThread extends Thread
 	private double currentSpeed = 0;
 	private String carName;
 	
+	private PrintWriter pw;
+	private BufferedReader br;
+	
 	public CarThread(Car carInfo, int index)
 	{
 		this.currentAcceleration = carInfo.getAcceleration();
@@ -42,6 +50,17 @@ public class CarThread extends Thread
 		this.currentBottomSpeed = currentHandling*2;
 		this.index = index;
 		this.carName=carInfo.getCarName();
+		
+		Socket s;
+		try {
+			s = new Socket("localhost", 2232);
+			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			pw = new PrintWriter(s.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		
 		map = new Map("map.txt");
 		mapArray = map.getMap();
@@ -143,6 +162,9 @@ public class CarThread extends Thread
 		return carName;
 	}
 
+	public void bombed(){
+		currentSpeed-=5;
+	}
 	
 	
 }

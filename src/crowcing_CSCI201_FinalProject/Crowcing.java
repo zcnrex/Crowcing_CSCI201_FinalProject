@@ -1,7 +1,10 @@
 package crowcing_CSCI201_FinalProject;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -16,6 +19,9 @@ public class Crowcing extends JFrame{
 	private ResultPanel resultPanel=new ResultPanel(1,1,1);
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
 	private JLayeredPane lp = null;
+	
+	public static JButton bomb;
+	public static JPanel whitePanel = new JPanel();
 	
 	public Crowcing(){
 		super("Crowcing");
@@ -38,10 +44,17 @@ public class Crowcing extends JFrame{
 		
 		lp.add(outerPanel, new Integer(200));
 		lp.add(MainScreenPanel.miniMapPanel, new Integer(300));
+		lp.add(bomb, new Integer(300));
 		lp.add(MainScreenPanel.chatPanel, new Integer(500));
+		lp.add(whitePanel, new Integer(600));
+		
+		bomb.setVisible(false);
 		MainScreenPanel.miniMapPanel.setVisible(false);
 		MainScreenPanel.chatPanel.setVisible(false);
+		whitePanel.setVisible(false);
 		outerPanel.setVisible(true);
+		
+		
 		
 		Thread t = new Thread(loginPanel);
 		t.start();
