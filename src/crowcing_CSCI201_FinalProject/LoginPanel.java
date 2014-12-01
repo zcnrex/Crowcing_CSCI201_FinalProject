@@ -78,7 +78,9 @@ public class LoginPanel extends JPanel implements Runnable{
 	
 	public void drawError(Graphics g){
 		g.setColor(Color.RED);
-		g.drawString(error, 250, 300);
+		g.setFont(new Font("Courier", Font.BOLD, 30));
+
+		g.drawString(error, 200, 250);
 	}
 	
 	public void changePanel(JPanel x, JPanel y){
@@ -157,6 +159,7 @@ public class LoginPanel extends JPanel implements Runnable{
 			newUserButton.setBounds(250, 0, 100, 50);
 			newUserButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent ae){
+//					error = "";
 					changePanel(initialPanel, registerPanel);
 				}
 			});
@@ -164,6 +167,7 @@ public class LoginPanel extends JPanel implements Runnable{
 			existingUserButton.setBounds(450, 0, 100, 50);
 			existingUserButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent ae){
+//					error = "";
 					changePanel(initialPanel, existingPanel);
 				}
 			});
@@ -216,6 +220,7 @@ public class LoginPanel extends JPanel implements Runnable{
 			backButton.setBounds(450, 150, 100, 50);
 			backButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent ae){
+					error = "";					
 					changePanel(registerPanel, initialPanel);
 				}
 			});
@@ -278,6 +283,7 @@ public class LoginPanel extends JPanel implements Runnable{
 			backButton.setBounds(450, 150, 100, 50);
 			backButton.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent ae){
+					error = "";
 					changePanel(existingPanel, initialPanel);
 				}
 			});
@@ -293,6 +299,15 @@ public class LoginPanel extends JPanel implements Runnable{
 	}
 	
 	public void run(){
+		while(true){
+			repaint();
 		revalidate();
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 	}
 }
