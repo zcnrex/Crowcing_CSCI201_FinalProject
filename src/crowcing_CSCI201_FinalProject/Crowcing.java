@@ -28,9 +28,9 @@ public class Crowcing extends JFrame{
 		
 		outerPanel.setLayout(new CardLayout());
 		
-//		outerPanel.add(loginPanel, "login");
-//		outerPanel.add(choosePanel, "chooseCar");
-//		outerPanel.add(resultPanel,"result");
+		outerPanel.add(loginPanel, "login");
+		outerPanel.add(choosePanel, "chooseCar");
+		outerPanel.add(resultPanel,"result");
 		outerPanel.add(mainScreenPanel,"mainScreen");
 		
 		

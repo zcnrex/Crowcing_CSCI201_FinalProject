@@ -20,6 +20,7 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 		chatPanel.setBounds(600, 0, (int)chatPanel.getPreferredSize().getWidth(), (int)chatPanel.getPreferredSize().getHeight());
 		miniMapPanel.setBounds(500, 0, (int)miniMapPanel.getPreferredSize().getWidth(), (int)miniMapPanel.getPreferredSize().getHeight());
 		racingPanel.setBounds(0, 0, (int)racingPanel.getPreferredSize().getWidth(), (int)racingPanel.getPreferredSize().getHeight());
+		Thread t = new Thread(racingPanel);
 		this.add(racingPanel);
 		this.add(chatPanel);
 		this.add(miniMapPanel);

@@ -110,6 +110,7 @@ public class LoginPanel extends JPanel implements Runnable{
 				if(db.checkRegister()==false){
 					error = "Username has been registered!";
 				}else{
+					userName=username.getText();
 					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 					cl.show(Crowcing.outerPanel, "chooseCar");
 				}
