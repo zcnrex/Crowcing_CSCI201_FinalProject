@@ -18,7 +18,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private Car car2 = new Car("car"+(2+""),7,8,9);
 	private CarThread carThread2 = new CarThread(car2, 1);
 	
-	private Map map = new Map("map2.txt");
+	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
 	private int[] position = new int[2], prevPosition = new int[2];
 	private int type = 0, odd = 0;
