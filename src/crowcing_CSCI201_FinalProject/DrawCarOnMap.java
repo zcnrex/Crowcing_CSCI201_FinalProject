@@ -3,8 +3,7 @@ package crowcing_CSCI201_FinalProject;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.swing.Icon;
 
@@ -13,23 +12,23 @@ import javax.swing.Icon;
 public class DrawCarOnMap implements Icon {
 	
 
-	private int degree;
-	private int index;
+
 	private int type;
 	private int visible;
-	private int carNum;
-	private List<Car> car=new ArrayList<Car>();
-	int x=0;
+	private String carName;
+
+	//int x=0;
 	
 	
-	public DrawCarOnMap(List<Car> _car,int visible,int carNum,int type)
+	public DrawCarOnMap(String carName,int type,int visible )
 	{
 		
-		this.index=index;
-		this.car=_car;
+		//this.index=index;
+		this.carName=carName;
 		this.visible=visible;
-		this.carNum=carNum;
+		//this.carNum=carNum;
 		this.type=type;
+		
 	}
 	@Override
 	public int getIconHeight() {
@@ -51,12 +50,37 @@ public class DrawCarOnMap implements Icon {
 		    g.fillRect(x, y, getIconWidth(), getIconHeight());
 		    if (type!=0)
 		    {
-		    	g.setColor(Color.black);
+		    	g.setColor(Color.BLACK);
 		    	g.fillRect(x, y, getIconWidth(),getIconHeight());
 		    	
+		    }
+		    
+		    if (visible==1)
+		    {
+		    	
+		    	if (carName.equals("car1"))
+			    {
+			    	g.setColor(Color.GREEN);
+			    	g.fillRect(x, y, getIconWidth(),getIconHeight());
+			    }
+			    else if (carName.equals("car2"))
+			    {
+			    	g.setColor(Color.RED);
+			    	g.fillRect(x, y, getIconWidth(),getIconHeight());
+			    }
+			    else if (carName.equals("car3"))
+			    {
+			    	g.setColor(Color.BLUE);
+			    	g.fillRect(x, y, getIconWidth(),getIconHeight());
+			    }
+		    }
+		    else if (visible==0)
+		    {
 		    	
 		    }
-		    Car cc=car.get(carNum);
+		    
+		    
+		    
 
 //		    if (visible==1)
 //		    {

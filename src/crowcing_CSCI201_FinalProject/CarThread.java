@@ -32,6 +32,7 @@ public class CarThread extends Thread
 	private int mapArray[][];
 	private Vector<Vector<Integer>> indexOfPosition;
 	private double currentSpeed = 0;
+	private String carName;
 	
 	public CarThread(Car carInfo, int index)
 	{
@@ -40,6 +41,7 @@ public class CarThread extends Thread
 		this.currentHandling = carInfo.getHandling();
 		this.currentBottomSpeed = currentHandling*2;
 		this.index = index;
+		this.carName=carInfo.getCarName();
 		
 		map = new Map("map.txt");
 		mapArray = map.getMap();
@@ -70,8 +72,8 @@ public class CarThread extends Thread
 			
 			
 			//For test
-			System.out.println(" Distance:" + totalDistanceTraveled + " x:" + positionx + " y:" + positiony);
-			System.out.println(" Speed:" + currentSpeed);
+			//System.out.println(" Distance:" + totalDistanceTraveled + " x:" + positionx + " y:" + positiony);
+			//System.out.println(" Speed:" + currentSpeed);
 			
 			try {
 				Thread.sleep((int)(5000/currentSpeed));
@@ -131,5 +133,16 @@ public class CarThread extends Thread
 		int type=mapArray[indexOfPosition.get(position).get(0)][indexOfPosition.get(position).get(1)];
 		return type;
 	}
+	
+	public double getCurrentSpeed()
+	{
+		return  currentSpeed;
+	}
+
+	public String getCarName() {
+		return carName;
+	}
+
+	
 	
 }

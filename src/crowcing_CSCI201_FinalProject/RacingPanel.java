@@ -25,122 +25,128 @@ public class RacingPanel extends JPanel implements Runnable{
 		this.setSize(600,600);
 		//this.setLayout(new GridLayout(50,50));
 		this.setVisible(true);
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	} 
 	
-	public RacingPanel(int i ){
-		this.setSize(600,600);
-		//this.setLayout(new GridLayout(50,50));
-		this.setVisible(true);
-		mapPosition = map.getMap();
-		carThread.start();
-	}
-	
-	public void paintComponent(Graphics g){
-		position[0] = carThread.getPositionX();
-		position[1] = carThread.getPositionY();
-		for (int i = -1; i < 1; i++){
-			for (int j = -1; j < 1; j++){
-				type = mapPosition[position[0]+i][position[1]+j];
+//	public RacingPanel(int i ){
+//		this.setSize(600,600);
+//		//this.setLayout(new GridLayout(50,50));
+//		this.setVisible(true);
+//		mapPosition = map.getMap();
+//		carThread.start();
+//	}
+//	
+//	public void paintComponent(Graphics g){
+//		position[0] = carThread.getPositionX();
+//		position[1] = carThread.getPositionY();
+//		for (int i = -1; i < 1; i++){
+//			for (int j = -1; j < 1; j++){
+//				type = mapPosition[position[0]+i][position[1]+j];
+////				
+//				if(type == 0){
+//					if(position[0] > 1 && position[0] < 49 && position[1] > 1 && position[1] < 49){
+//						if(mapPosition[position[0]+i][position[1]+j-1] == 8 || mapPosition[position[0]+i][position[1]+j-1] == 4 ||
+//								mapPosition[position[0]+i+1][position[1]+j] == 8 || mapPosition[position[0]+i+1][position[1]+j] == 4){
+//							
+//							poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+2)*len);							
+//					        g.setColor(Color.BLACK);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//					        
+//					        poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+1)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);							
+//					        g.setColor(Color.GREEN);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//							continue;
+//						}
+//						else if(mapPosition[position[0]+i][position[1]+j+1] == 8 || mapPosition[position[0]+i][position[1]+j+1] == 4 ||
+//								mapPosition[position[0]+i-1][position[1]+j] == 8 || mapPosition[position[0]+i-1][position[1]+j] == 4){
+//							
+//							poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+2)*len);							
+//					        g.setColor(Color.GREEN);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//					        
+//					        poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+1)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);							
+//					        g.setColor(Color.BLACK);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//							continue;
+//						}
+//						else if(mapPosition[position[0]+i][position[1]+j+1] == 6 || mapPosition[position[0]+i][position[1]+j+1] == 2 ||
+//								mapPosition[position[0]+i+1][position[1]+j] == 6 || mapPosition[position[0]+i+1][position[1]+j] == 2){
+//							
+//							poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+2)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+2)*len);							
+//					        g.setColor(Color.BLACK);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//					        
+//					        poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);							
+//					        g.setColor(Color.GREEN);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//							continue;
+//						}
+//						else if(mapPosition[position[0]+i][position[1]+j-1] == 6 || mapPosition[position[0]+i][position[1]+j-1] == 2 ||
+//								mapPosition[position[0]+i-1][position[1]+j] == 6 || mapPosition[position[0]+i-1][position[1]+j] == 2){
+//							
+//							poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+2)*len, (j+1)*len);
+//							poly.addPoint((i+2)*len, (j+2)*len);							
+//					        g.setColor(Color.GREEN);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//					        
+//					        poly = new Polygon();
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);
+//							poly.addPoint((i+1)*len, (j+2)*len);							
+//					        g.setColor(Color.BLACK);
+//					        g.drawPolygon(poly);
+//					        g.fillPolygon(poly);
+//							continue;
+//						}
+//					}
+//					g.setColor(Color.GREEN);
+//					g.drawRect((i+1)*len, (j+1)*len, len, len);
+//				}
+//				else {
+//					g.setColor(Color.BLACK);
+//					g.drawRect((i+1)*len, (j+1)*len, len, len);
+//				}
+//					
 //				
-				if(type == 0){
-					if(position[0] > 1 && position[0] < 49 && position[1] > 1 && position[1] < 49){
-						if(mapPosition[position[0]+i][position[1]+j-1] == 8 || mapPosition[position[0]+i][position[1]+j-1] == 4 ||
-								mapPosition[position[0]+i+1][position[1]+j] == 8 || mapPosition[position[0]+i+1][position[1]+j] == 4){
-							
-							poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+2)*len);							
-					        g.setColor(Color.BLACK);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-					        
-					        poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+1)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);							
-					        g.setColor(Color.GREEN);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-							continue;
-						}
-						else if(mapPosition[position[0]+i][position[1]+j+1] == 8 || mapPosition[position[0]+i][position[1]+j+1] == 4 ||
-								mapPosition[position[0]+i-1][position[1]+j] == 8 || mapPosition[position[0]+i-1][position[1]+j] == 4){
-							
-							poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+2)*len);							
-					        g.setColor(Color.GREEN);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-					        
-					        poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+1)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);							
-					        g.setColor(Color.BLACK);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-							continue;
-						}
-						else if(mapPosition[position[0]+i][position[1]+j+1] == 6 || mapPosition[position[0]+i][position[1]+j+1] == 2 ||
-								mapPosition[position[0]+i+1][position[1]+j] == 6 || mapPosition[position[0]+i+1][position[1]+j] == 2){
-							
-							poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+2)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+2)*len);							
-					        g.setColor(Color.BLACK);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-					        
-					        poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);							
-					        g.setColor(Color.GREEN);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-							continue;
-						}
-						else if(mapPosition[position[0]+i][position[1]+j-1] == 6 || mapPosition[position[0]+i][position[1]+j-1] == 2 ||
-								mapPosition[position[0]+i-1][position[1]+j] == 6 || mapPosition[position[0]+i-1][position[1]+j] == 2){
-							
-							poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+2)*len, (j+1)*len);
-							poly.addPoint((i+2)*len, (j+2)*len);							
-					        g.setColor(Color.GREEN);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-					        
-					        poly = new Polygon();
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);
-							poly.addPoint((i+1)*len, (j+2)*len);							
-					        g.setColor(Color.BLACK);
-					        g.drawPolygon(poly);
-					        g.fillPolygon(poly);
-							continue;
-						}
-					}
-					g.setColor(Color.GREEN);
-					g.drawRect((i+1)*len, (j+1)*len, len, len);
-				}
-				else {
-					g.setColor(Color.BLACK);
-					g.drawRect((i+1)*len, (j+1)*len, len, len);
-				}
-					
-				
-				
-			}
-		}
-	}
-	public void run(){
-		while(true){
-		repaint();
-		}
-	}
+//				
+//			}
+//		}
+//	}
+//	public void run(){
+//		while(true){
+//		repaint();
+//		}
+//	}
 }
