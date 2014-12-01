@@ -1,6 +1,7 @@
 package crowcing_CSCI201_FinalProject;
 
 import java.awt.CardLayout;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -12,21 +13,27 @@ public class Crowcing extends JFrame{
 	public static JPanel outerPanel = new JPanel();
 	
 	private LoginPanel loginPanel = new LoginPanel();
-	private CarChoosingPanel choosePanel=new CarChoosingPanel();
-	private ResultPanel resultPanel=new ResultPanel(1,1,1);
+	public static CarChoosingPanel choosePanel;//=new CarChoosingPanel();
+	public static ResultPanel resultPanel=new ResultPanel();
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
-	private JLayeredPane lp = null;
 	
-	public Crowcing(){
+	private JLayeredPane lp = null;//Override miniMap an racingPanel
+	
+	public static String ipAdress;
+	
+	public Crowcing(String ip){
 		super("Crowcing");
 		setSize(800, 600);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		ipAdress=ip;
+		
 		//Client client = new Client("10.120.71.144", 2222);
 		
 		lp = this.getLayeredPane(); 
+		choosePanel=new CarChoosingPanel();
 		
 		outerPanel.setLayout(new CardLayout());
 		
@@ -56,9 +63,14 @@ public class Crowcing extends JFrame{
 		setVisible(true);
 	}
 	
+
 	
 	public static void main(String[] args) {
-		Crowcing crowcing = new Crowcing();
+		System.out.println("IP address for server:");
+		
+		Scanner scan=new Scanner(System.in);
+		String ip=scan.nextLine();
+		Crowcing crowcing = new Crowcing(ip);
 
 	}
 

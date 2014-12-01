@@ -164,6 +164,11 @@ public class Map {
 		this.indexOfPosition = indexOfPosition;
 	}
 	
+	public int distancePerLap()
+	{
+		return indexOfPosition.size();
+	}
+	
 	
 }
 

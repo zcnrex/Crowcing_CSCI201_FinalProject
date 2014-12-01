@@ -34,7 +34,7 @@ public class DrawMap implements Icon {
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// TODO Auto-generated method stub
-		    g.setColor(Color.CYAN);
+		    g.setColor(Color.LIGHT_GRAY);
 		    g.fillRect(x, y, getIconWidth(), getIconHeight());
 		    if (type!=0)
 		    {
