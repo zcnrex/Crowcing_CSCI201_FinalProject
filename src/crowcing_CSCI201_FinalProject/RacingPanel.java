@@ -21,13 +21,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private int type = 0, odd = 0;
 	private final int len = 200;
 	private Polygon poly = new Polygon();
-	
-//	public RacingPanel()
-//	{
-//		this.setSize(600,600);
-//		//this.setLayout(new GridLayout(50,50));
-//		this.setVisible(true);
-//	} 
+
 	
 	public RacingPanel( ){
 		this.setSize(600,600);
@@ -40,10 +34,8 @@ public class RacingPanel extends JPanel implements Runnable{
 				mapPosition[i][j] = tempMap[j][i];
 			}
 		}
-//		mapPosition = map.getMap();
-		carThread.start();
 	}
-	
+
 	public void paintComponent(Graphics g){
 		position[0] = carThread.getPositionX();
 		position[1] = carThread.getPositionY();

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 //add all components inside this panel when racing starts.
 public class MainScreenPanel extends JPanel implements Runnable// contain ChatPanel, miniMapPanel and RacingPanel
 {
-	private MiniMapPanel miniMapPanel=new MiniMapPanel();
+	public static MiniMapPanel miniMapPanel=new MiniMapPanel();
 	private ChatPanel chatPanel=new ChatPanel();
 	private RacingPanel racingPanel=new RacingPanel();
 

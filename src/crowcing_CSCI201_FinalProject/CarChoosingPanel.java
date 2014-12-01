@@ -25,7 +25,7 @@ public class CarChoosingPanel extends JPanel{
 	private Car car[]=new Car[3];
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
-	public static Car chosenCar;
+	public static Car chosenCar=null;
 	
 	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
 	
@@ -81,7 +81,10 @@ public class CarChoosingPanel extends JPanel{
 				// TODO Auto-generated method stub
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "mainScreen");
+				
 				chosenCar=car[carNumSelect];
+				Thread t=new Thread(MainScreenPanel.miniMapPanel);
+				t.start();
 				System.out.println("Start car "+(carNumSelect+1));
 				
 			}
