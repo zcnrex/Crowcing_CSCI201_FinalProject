@@ -31,12 +31,19 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 	private Car car[]=new Car[3];
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
+	
 	public static Car chosenCar=null;
+	public static Car opponentCar=null;
+	public static int chosenCarID;
+	public static int opponentCarID;
+	
 	private PrintWriter pw;
 	private BufferedReader br;
 	private JButton startButton;
 	
 	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
+	
+	private String opponentCarName;
 	
 	
 	public void paintComponent(Graphics g){
@@ -178,12 +185,13 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int userNo=(int)(Math.random()*(9999-1000+1)+1000);
-				pw.println(userNo+" are using car"+(carNumSelect+1));
+				chosenCarID=userNo;
+				pw.println(userNo+" is using car"+(carNumSelect+1));
 				
 				while (true)
 			    {	
 					System.out.println(userNo);
-					pw.println(userNo+" are using car"+(carNumSelect+1));
+					pw.println(userNo+" is using car"+(carNumSelect+1));
 					pw.flush();
 			    	String temp;
 					try {
@@ -193,8 +201,13 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 				    	String[] tokens = temp.split(delims);
 				    	if (tokens.length>=3)
 				    	{
-				    		if(!tokens[0].equals((userNo+"")) && tokens[1].equals("are") && tokens[2].equals("using") )
+				    		if(!tokens[0].equals((userNo+"")) && tokens[1].equals("is") && tokens[2].equals("using") )
 					    	{
+				    			opponentCarName=tokens[3];
+				    			System.out.println(opponentCarName+"   !!");
+				    			int carIndex=tokens[3].charAt(3)-'1';
+				    			opponentCar=car[carIndex];
+				    			opponentCarID=Integer.parseInt(tokens[0]);
 					    		break;
 					    	}
 				    	}

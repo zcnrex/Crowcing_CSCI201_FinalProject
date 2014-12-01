@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 //Constantly changing background to indicate moving
 public class RacingPanel extends JPanel implements Runnable{
 	private CarThread carThread;
-	private Car car2 = new Car("car"+(2+""),7,8,9);
-	private CarThread carThread2 = new CarThread(car2, 1);
+	//private Car car2 = new Car("car"+(2+""),7,8,9);
+	private CarThread carThread2;// = new CarThread(car2, 1);
 	
 	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
@@ -24,7 +24,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private int type = 0, odd = 0;
 	private final int len = 200;
 	private Polygon poly = new Polygon();
-	private Statistics s = new Statistics(carThread, carThread2);
+	private Statistics s;// = new Statistics(carThread, carThread2);
 
 	
 	public RacingPanel( ){
@@ -244,7 +244,11 @@ public class RacingPanel extends JPanel implements Runnable{
 		int type2 = 0;
 			
 		type2 = mapPosition[position2[0]][position2[1]];
-		ImageIcon carImg2 = new ImageIcon("car/car2-" + type2 + ".png");
+		
+		String carName2=carThread2.getCarName();
+		ImageIcon carImg2 = new ImageIcon("car/"+carName2+"-" + type + ".png");
+		
+		
 		int x = position2[0] - position[0] + 1;
 		int y = position2[1] - position[1] + 1;
 		switch (type2){
@@ -278,7 +282,11 @@ public class RacingPanel extends JPanel implements Runnable{
 	public void run(){
 		carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
 		carThread.start();
+		
+		carThread2 = new CarThread(CarChoosingPanel.opponentCar, 2);
 		carThread2.start();
+		
+		s = new Statistics(carThread, carThread2,map);
 		s.start();
 		while(true){
 			repaint();
@@ -290,6 +298,8 @@ public class RacingPanel extends JPanel implements Runnable{
 			}
 //			if 
 			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+				MainScreenPanel.chatPanel.setVisible(false);
+				MainScreenPanel.miniMapPanel.setVisible(false);
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
 				break;

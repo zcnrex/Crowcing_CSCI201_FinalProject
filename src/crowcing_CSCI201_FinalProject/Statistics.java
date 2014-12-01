@@ -6,23 +6,28 @@ import java.awt.Graphics;
 
 //Calculate and store lap time, ranking
 public class Statistics extends Thread{
-	CarThread self, rival;
-	int minute = 0, second = 0, milisecond = 0;
-	String name = "", rank = "";
+	private CarThread self, rival;
+	private int minute = 0, second = 0, milisecond = 0;
+	private String name = "", rank = "";
+	private Map map;
 
-	public Statistics(CarThread self, CarThread rival){
+	public Statistics(CarThread self, CarThread rival, Map map){
 		this.self = self;
 		this.rival = rival;
 		this.name = LoginPanel.userName;
+		this.map=map;
 	}
 	//Draw
 	public void drawStatistics(Graphics g){
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Courier", Font.BOLD, 20));
-		g.drawString("Player: " + name, 10, 10);
-		g.drawString("Rank: " + rank, 10, 30);
-		g.drawString("Time: " + minute + ":" + second + ":" + milisecond, 10, 50);
-		g.drawString("Speed: " + self.getCurrentSpeed(), 10, 70);
+		g.drawString("Player: " + name, 10, 30);
+		g.drawString("Rank: " + rank, 10, 50);
+		g.drawString("Time: " + minute + ":" + second + ":" + milisecond, 10, 70);
+		g.drawString("Speed: " + self.getCurrentSpeed(), 10, 90);
+		
+		int percent=(int)((self.getTotalDistanceTraveled()/map.distancePerLap())*100);
+		g.drawString("Match Finished: "+percent+"%", 10, 110);
 //		g.drawString("Your Position: " + self.getTotalDistanceTraveled(), 10, 90);
 
 //		g.drawString("Rival's Position: " + rival.getTotalDistanceTraveled(), 10, 110);
