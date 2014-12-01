@@ -25,6 +25,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private final int len = 200;
 	private Polygon poly = new Polygon();
 	private Statistics s;// = new Statistics(carThread, carThread2);
+	private int chosenID, opponentID;
 
 	
 	public RacingPanel( ){
@@ -210,47 +211,65 @@ public class RacingPanel extends JPanel implements Runnable{
 		String carName=carThread.getCarName();
 		ImageIcon carImg = new ImageIcon("car/"+carName+"-" + type + ".png");
 		int size = (int) (len/2*1.5);
-		switch (type){
-			case 1: 
-				g.drawImage(carImg.getImage(), len, len-len/8, size, size, null);
-				break;
-			case 2:
-				g.drawImage(carImg.getImage(), len, len - len/4, size, size, null);
-				break;
-			case 3:
-				g.drawImage(carImg.getImage(), len-len/8, len, size, size, null);
-				break;
-			case 4:
-				g.drawImage(carImg.getImage(), len, len + len/4*3 - len/8, size, size, null);
-				break;
-			case 5:
-				g.drawImage(carImg.getImage(), len, len*3/2-len/8, size, size, null);
-				break;
-			case 6: 
-				g.drawImage(carImg.getImage(), len*3/2, len*3/2, size, size, null);
-				break;
-			case 7: 
-				g.drawImage(carImg.getImage(), len*3/2-len/8, len, size, size, null);
-				break;
-			case 8: 
-				g.drawImage(carImg.getImage(), len*3/2, len, size, size, null);
-				break;
-		}
-		s.drawStatistics(g);
 		
 		int[] position2 = new int[2];
 		position2[0] = carThread2.getPositionX();
 		position2[1] = carThread2.getPositionY();
 		int type2 = 0;
+		
+		int x1, y1;
+		if (chosenID < opponentID){
+			x1 = position[0] - position2[0] + 1;
+			y1 = position[1] - position2[1] + 1;
+		}
+		else{
+			x1 = 1;
+			y1 = 1;
+		}
+		switch (type){
+			case 1: 
+				g.drawImage(carImg.getImage(), x1*len, y1*(len-len/8), size, size, null);
+				break;
+			case 2:
+				g.drawImage(carImg.getImage(), x1*len, y1*(len - len/4), size, size, null);
+				break;
+			case 3:
+				g.drawImage(carImg.getImage(), x1*(len-len/8), y1*len, size, size, null);
+				break;
+			case 4:
+				g.drawImage(carImg.getImage(), x1*len, y1*(len + len/4*3 - len/8), size, size, null);
+				break;
+			case 5:
+				g.drawImage(carImg.getImage(), x1*len, y1*(len*3/2-len/8), size, size, null);
+				break;
+			case 6: 
+				g.drawImage(carImg.getImage(), x1*len*3/2, y1*len*3/2, size, size, null);
+				break;
+			case 7: 
+				g.drawImage(carImg.getImage(), x1*(len*3/2-len/8), y1*len, size, size, null);
+				break;
+			case 8: 
+				g.drawImage(carImg.getImage(), x1*len*3/2, y1*len, size, size, null);
+				break;
+		}
+		s.drawStatistics(g);
+		
+		
 			
 		type2 = mapPosition[position2[0]][position2[1]];
 		
 		String carName2=carThread2.getCarName();
 		ImageIcon carImg2 = new ImageIcon("car/"+carName2+"-" + type + ".png");
+		int x, y;
+		if (chosenID > opponentID){
+			x = position2[0] - position[0] + 1;
+			y = position2[1] - position[1] + 1;
+		}
+		else{
+			x = 1;
+			y = 1;
+		}
 		
-		
-		int x = position2[0] - position[0] + 1;
-		int y = position2[1] - position[1] + 1;
 		switch (type2){
 		case 1: 
 			g.drawImage(carImg2.getImage(), x*len, y*(len*3/2-len/8), size, size, null);
@@ -280,13 +299,26 @@ public class RacingPanel extends JPanel implements Runnable{
 	}	
 	
 	public void run(){
-		carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
-		carThread.start();
+		chosenID = CarChoosingPanel.chosenCarID;
+		opponentID = CarChoosingPanel.opponentCarID;
+		if (chosenID > opponentID){
+			carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
+			carThread.start();
+			
+			carThread2 = new CarThread(CarChoosingPanel.opponentCar, 2);
+			carThread2.start();
+			s = new Statistics(carThread, carThread2,map);
+		}
+		else
+		{
+			carThread = new CarThread(CarChoosingPanel.opponentCar, 1);
+			carThread.start();
+			
+			carThread2 = new CarThread(CarChoosingPanel.chosenCar, 2);
+			carThread2.start();
+			s = new Statistics(carThread2, carThread,map);
+		}
 		
-		carThread2 = new CarThread(CarChoosingPanel.opponentCar, 2);
-		carThread2.start();
-		
-		s = new Statistics(carThread, carThread2,map);
 		s.start();
 		while(true){
 			repaint();
@@ -296,18 +328,36 @@ public class RacingPanel extends JPanel implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-//			if 
-			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+			
+			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size() || 
+					carThread2.getTotalDistanceTraveled()>=map.getIndexOfPosition().size() ){
+				Crowcing.resultPanel.setFinalRank(s.getRank());
+			}
+			if (chosenID > opponentID && carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+				System.out.println("Finsh");
 				MainScreenPanel.chatPanel.setVisible(false);
 				MainScreenPanel.miniMapPanel.setVisible(false);
-				
-				System.out.println(s.getLapTime()+" 111  "+s.getRank());
-				
 				Crowcing.resultPanel.setLapTime(s.getLapTime());
-				Crowcing.resultPanel.setFinalRank(s.getRank());
+//				System.out.println("Rank: " + s.getRank());
 				Crowcing.resultPanel.repaint();
+//				Crowcing.resultPanel
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
+				break;
+			}
+			else if (chosenID < opponentID && carThread2.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+				System.out.println("Finsh");
+				MainScreenPanel.chatPanel.setVisible(false);
+				MainScreenPanel.miniMapPanel.setVisible(false);
+
+				Crowcing.resultPanel.setLapTime(s.getLapTime());
+//				System.out.println("Rank: " + s.getRank());
+				Crowcing.resultPanel.repaint();
+//				Crowcing.resultPanel
+				
+				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				cl.show(Crowcing.outerPanel, "result");
+				
 				break;
 			}
 				//finish round
