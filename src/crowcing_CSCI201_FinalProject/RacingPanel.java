@@ -1,5 +1,6 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -13,14 +14,17 @@ import javax.swing.JPanel;
 //One car or two?
 //Constantly changing background to indicate moving
 public class RacingPanel extends JPanel implements Runnable{
-	private Car car = new Car("car"+(1+""),7,8,9);
-	private CarThread carThread = new CarThread(car, 1);
-	private Map map = new Map("map.txt");
+	private CarThread carThread;
+	private Car car2 = new Car("car"+(2+""),7,8,9);
+	private CarThread carThread2 = new CarThread(car2, 1);
+	
+	private Map map = new Map("map2.txt");
 	private int[][] mapPosition = new int[50][50];
 	private int[] position = new int[2], prevPosition = new int[2];
 	private int type = 0, odd = 0;
 	private final int len = 200;
 	private Polygon poly = new Polygon();
+	private Statistics s = new Statistics(carThread, carThread2);
 
 	
 	public RacingPanel( ){
@@ -203,9 +207,8 @@ public class RacingPanel extends JPanel implements Runnable{
 		}
 
 		type = mapPosition[position[0]][position[1]];
-		ImageIcon carImg = new ImageIcon("car/car1-" + type + ".png");
-//		Image ca = carImg.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-//		ImageIcon carImg = new ImageIcon("car/car1-" + type + ".png");
+		String carName=carThread.getCarName();
+		ImageIcon carImg = new ImageIcon("car/"+carName+"-" + type + ".png");
 		int size = (int) (len/2*1.5);
 		switch (type){
 			case 1: 
@@ -218,7 +221,7 @@ public class RacingPanel extends JPanel implements Runnable{
 				g.drawImage(carImg.getImage(), len-len/8, len, size, size, null);
 				break;
 			case 4:
-				g.drawImage(carImg.getImage(), len, len + len/4*3, size, size, null);
+				g.drawImage(carImg.getImage(), len, len + len/4*3 - len/8, size, size, null);
 				break;
 			case 5:
 				g.drawImage(carImg.getImage(), len, len*3/2-len/8, size, size, null);
@@ -233,8 +236,50 @@ public class RacingPanel extends JPanel implements Runnable{
 				g.drawImage(carImg.getImage(), len*3/2, len, size, size, null);
 				break;
 		}
-	}
+		s.drawStatistics(g);
+		
+		int[] position2 = new int[2];
+		position2[0] = carThread2.getPositionX();
+		position2[1] = carThread2.getPositionY();
+		int type2 = 0;
+			
+		type2 = mapPosition[position2[0]][position2[1]];
+		ImageIcon carImg2 = new ImageIcon("car/car2-" + type2 + ".png");
+		int x = position2[0] - position[0] + 1;
+		int y = position2[1] - position[1] + 1;
+		switch (type2){
+		case 1: 
+			g.drawImage(carImg2.getImage(), x*len, y*(len*3/2-len/8), size, size, null);
+			break;
+		case 2:
+			g.drawImage(carImg2.getImage(), x*len*3/2, y*(len*3/2-len/8), size, size, null);
+			break;
+		case 3:
+			g.drawImage(carImg2.getImage(), x*(len*3/2-len/8), y*len, size, size, null);
+			break;
+		case 4:
+			g.drawImage(carImg2.getImage(), x*len*3/2, y*len, size, size, null);
+			break;
+		case 5:
+			g.drawImage(carImg2.getImage(), x*len, y*(len-len/8), size, size, null);
+			break;
+		case 6: 
+			g.drawImage(carImg2.getImage(), x*len, y*(len - len/4), size, size, null);
+			break;
+		case 7: 
+			g.drawImage(carImg2.getImage(), x*(len-len/8), y*len, size, size, null);
+			break;
+		case 8: 
+			g.drawImage(carImg2.getImage(), x*len, y*(len + len/2), size, size, null);
+			break;
+		}
+	}	
+	
 	public void run(){
+		carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
+		carThread.start();
+		carThread2.start();
+		s.start();
 		while(true){
 			repaint();
 			try {
@@ -243,6 +288,15 @@ public class RacingPanel extends JPanel implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+//			if 
+			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				cl.show(Crowcing.outerPanel, "result");
+				break;
+			}
+				//finish round
+				
+			
 		}
 	}
 }

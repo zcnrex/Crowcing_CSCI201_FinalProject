@@ -43,7 +43,7 @@ public class CarThread extends Thread
 		this.index = index;
 		this.carName=carInfo.getCarName();
 		
-		map = new Map("map.txt");
+		map = new Map("map2.txt");
 		mapArray = map.getMap();
 		indexOfPosition = map.getIndexOfPosition();
 	}
