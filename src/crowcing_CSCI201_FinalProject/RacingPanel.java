@@ -354,9 +354,10 @@ public class RacingPanel extends JPanel implements Runnable{
 //				System.out.println("Rank: " + s.getRank());
 				Crowcing.resultPanel.repaint();
 //				Crowcing.resultPanel
-
+				
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
+				
 				break;
 			}
 				//finish round
