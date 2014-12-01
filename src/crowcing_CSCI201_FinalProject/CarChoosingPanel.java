@@ -1,5 +1,6 @@
 package crowcing_CSCI201_FinalProject;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +18,10 @@ import java.net.Socket;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -64,7 +68,7 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 		//pw.println(" are using car"+(carNumSelect+1)); 
 		Socket s;
 		try {
-			s = new Socket("localhost", 2232);
+			s = new Socket(Crowcing.ipAdress, 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			pw = new PrintWriter(s.getOutputStream());
 		} catch (IOException e1) {
@@ -181,6 +185,7 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 		startButton.addActionListener(new ActionListener()//actionListener for startButton
 		{
 
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -188,11 +193,31 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 				chosenCarID=userNo;
 				pw.println(userNo+" is using car"+(carNumSelect+1));
 				
+//				JDialog jj= new JDialog();
+//				
+//				jj.setLocationRelativeTo(Crowcing.outerPanel);
+//				//jj.setLayout(new BorderLayout());
+//				jj.setSize(500, 100);
+//				jj.setModal(true);
+//				JLabel label=new JLabel("Waiting for another user..");
+//				label.setFont(new Font("Dialog",   1,   16));
+//				
+//				
+//				jj.add(label);
+//				jj.setVisible(true);
+//				
+               
+               
+				
 				while (true)
 			    {	
 					System.out.println(userNo);
 					pw.println(userNo+" is using car"+(carNumSelect+1));
 					pw.flush();
+					
+					
+					
+					
 			    	String temp;
 					try {
 						temp = br.readLine();
@@ -208,6 +233,8 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 				    			int carIndex=tokens[3].charAt(3)-'1';
 				    			opponentCar=car[carIndex];
 				    			opponentCarID=Integer.parseInt(tokens[0]);
+				    			//jj.setVisible(false);
+				    			
 					    		break;
 					    	}
 				    	}

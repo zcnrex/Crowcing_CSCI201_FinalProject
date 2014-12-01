@@ -26,7 +26,7 @@ public class Statistics extends Thread{
 		g.drawString("Time: " + minute + ":" + second + ":" + milisecond, 10, 70);
 		g.drawString("Speed: " + self.getCurrentSpeed(), 10, 90);
 		
-		int percent=(int)((self.getTotalDistanceTraveled()/map.distancePerLap())*100);
+		int percent=(int)((self.getTotalDistanceTraveled()*100/map.distancePerLap()));
 		g.drawString("Match Finished: "+percent+"%", 10, 110);
 //		g.drawString("Your Position: " + self.getTotalDistanceTraveled(), 10, 90);
 
@@ -61,5 +61,14 @@ public class Statistics extends Thread{
 			else milisecond++;
 		}
 	
+	}
+	
+	public String getLapTime(){
+		String lapTime = minute + ":" + second + ":" + milisecond;
+		return lapTime;
+	}
+	
+	public String getRank(){
+		return rank;
 	}
 }
