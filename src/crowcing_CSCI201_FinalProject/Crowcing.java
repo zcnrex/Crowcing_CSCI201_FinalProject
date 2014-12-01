@@ -12,7 +12,7 @@ public class Crowcing extends JFrame{
 	public static JPanel outerPanel = new JPanel();
 	
 	private LoginPanel loginPanel = new LoginPanel();
-	private CarChoosingPanel choosePanel=new CarChoosingPanel();
+	public static CarChoosingPanel choosePanel;//=new CarChoosingPanel();
 	private ResultPanel resultPanel=new ResultPanel(1,1,1);
 	private MainScreenPanel mainScreenPanel=new MainScreenPanel();
 	private JLayeredPane lp = null;
@@ -27,6 +27,7 @@ public class Crowcing extends JFrame{
 		//Client client = new Client("10.120.71.144", 2222);
 		
 		lp = this.getLayeredPane(); 
+		choosePanel=new CarChoosingPanel();
 		
 		outerPanel.setLayout(new CardLayout());
 		

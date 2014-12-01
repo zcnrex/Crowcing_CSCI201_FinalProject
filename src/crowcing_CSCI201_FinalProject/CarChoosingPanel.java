@@ -8,6 +8,11 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -16,8 +21,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+
 //Display image and information of three cars
-public class CarChoosingPanel extends JPanel{
+public class CarChoosingPanel extends JPanel implements Runnable{
 
 	private JLabel speedLabel;
 	private JLabel accelerationLabel;
@@ -26,6 +32,9 @@ public class CarChoosingPanel extends JPanel{
 	private JButton carButton[]=new JButton[3];//buttons for car
 	private int carNumSelect;
 	public static Car chosenCar=null;
+	private PrintWriter pw;
+	private BufferedReader br;
+	private JButton startButton;
 	
 	private ImageIcon backgroundImage= new ImageIcon("image/Motor.jpg");
 	
@@ -45,7 +54,16 @@ public class CarChoosingPanel extends JPanel{
 		this.setSize(800,600);
 		this.setLayout(null);
 		this.setVisible(true);
-		
+		//pw.println(" are using car"+(carNumSelect+1)); 
+		Socket s;
+		try {
+			s = new Socket("localhost", 2232);
+			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+			pw = new PrintWriter(s.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		
@@ -66,34 +84,14 @@ public class CarChoosingPanel extends JPanel{
 		car[2]=new Car("car"+(3+""),9,7,8);
 		
 		
-		JButton startButton=new JButton("start");//set up start button
+		startButton=new JButton("start");//set up start button
 		startButton.setPreferredSize(new Dimension(80,60));
 		
 		startButton.setBounds(650, 430,  (int)startButton.getPreferredSize().getWidth(), (int)startButton.getPreferredSize().getHeight());
 		
 		
 		
-		startButton.addActionListener(new ActionListener()//actionListener for startButton
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
-				cl.show(Crowcing.outerPanel, "mainScreen");
-				MainScreenPanel.miniMapPanel.setVisible(true);
-				MainScreenPanel.chatPanel.setVisible(true);
-				
-				chosenCar=car[carNumSelect];
-				Thread t1=new Thread(MainScreenPanel.miniMapPanel);
-				t1.start();
-				Thread t2=new Thread(MainScreenPanel.racingPanel);
-				t2.start();
-				System.out.println("Start car "+(carNumSelect+1));
-				
-			}
-			
-		});
+		
 		
 		JLabel title=new JLabel("Choose the car you like...");//set Labels
 		speedLabel=new JLabel("Top speed score: N/A");
@@ -165,6 +163,66 @@ public class CarChoosingPanel extends JPanel{
 		this.add(speedLabel);
 		this.add(accelerationLabel);
 		this.add(handlingLabel);
+		
+		
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		startButton.addActionListener(new ActionListener()//actionListener for startButton
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int userNo=(int)(Math.random()*(9999-1000+1)+1000);
+				pw.println(userNo+" are using car"+(carNumSelect+1));
+				
+				while (true)
+			    {	
+					System.out.println(userNo);
+					pw.println(userNo+" are using car"+(carNumSelect+1));
+					pw.flush();
+			    	String temp;
+					try {
+						temp = br.readLine();
+						System.out.println(temp);
+				    	String delims = "[. ]";
+				    	String[] tokens = temp.split(delims);
+				    	if (tokens.length>=3)
+				    	{
+				    		if(!tokens[0].equals((userNo+"")) && tokens[1].equals("are") && tokens[2].equals("using") )
+					    	{
+					    		break;
+					    	}
+				    	}
+				    	
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    	
+
+			    	
+			    }
+				
+				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
+				cl.show(Crowcing.outerPanel, "mainScreen");
+				MainScreenPanel.miniMapPanel.setVisible(true);
+				MainScreenPanel.chatPanel.setVisible(true);
+				
+				chosenCar=car[carNumSelect];
+				Thread t1=new Thread(MainScreenPanel.miniMapPanel);
+				t1.start();
+				Thread t2=new Thread(MainScreenPanel.racingPanel);
+				t2.start();
+				System.out.println("Start car "+(carNumSelect+1));
+				
+			}
+			
+		});
 		
 	}
 	

@@ -113,6 +113,8 @@ public class LoginPanel extends JPanel implements Runnable{
 					userName=username.getText();
 					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 					cl.show(Crowcing.outerPanel, "chooseCar");
+					Thread t=new Thread(Crowcing.choosePanel);
+					t.start();
 				}
 			}
 			if(ae.getSource().equals(loginButton)){
@@ -124,6 +126,8 @@ public class LoginPanel extends JPanel implements Runnable{
 					userName=username.getText();
 					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 					cl.show(Crowcing.outerPanel, "chooseCar");
+					Thread t=new Thread(Crowcing.choosePanel);
+					t.start();
 				}
 			}
 			
