@@ -333,6 +333,7 @@ public class RacingPanel extends JPanel implements Runnable{
 		bombThread.start();
 		
 		s.start();
+		String rank = "";
 		while(true){
 			repaint();
 			try {
@@ -342,24 +343,27 @@ public class RacingPanel extends JPanel implements Runnable{
 				e.printStackTrace();
 			}
 			
-			if(carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size() || 
-					carThread2.getTotalDistanceTraveled()>=map.getIndexOfPosition().size() ){
+			if(carThread.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1) || 
+					carThread2.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1) ){
 				Crowcing.resultPanel.setFinalRank(s.getRank());
+				rank = s.getRank();
 			}
 			if ((chosenID > opponentID && carThread.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1)) ||
 					(chosenID < opponentID && carThread2.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1))){
 				System.out.println("Finsh");
-				MainScreenPanel.chatPanel.setVisible(false);
 				MainScreenPanel.miniMapPanel.setVisible(false);
+				MainScreenPanel.chatPanel.setVisible(false);
 
 				Crowcing.bomb.setVisible(false);
+				
 
 				Crowcing.resultPanel.setLapTime(s.getLapTime());
 //				System.out.println("Rank: " + s.getRank());
-				Crowcing.resultPanel.repaint();
 //				Crowcing.resultPanel
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
+				Crowcing.resultPanel.repaint();
+				System.out.println("Rank: " + rank);
 				break;
 			}
 				//finish round

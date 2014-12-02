@@ -73,6 +73,7 @@ public class ResultPanel extends JPanel{
 		
 		JBrematch.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				
 				cl.show(Crowcing.outerPanel, "chooseCar");
@@ -100,7 +101,7 @@ public class ResultPanel extends JPanel{
 		g.setFont(new Font("Dialog", 1, 24));
 		g.setColor(Color.WHITE);
 		g.drawString("Final Rank: " + rank, 300, 140);
-		g.drawString("Best Lap Time: " + lapTime, 300, 200);
+		g.drawString("Lap Time: " + lapTime, 300, 200);
 	}
 	
 	public void setFinalRank(String rank){

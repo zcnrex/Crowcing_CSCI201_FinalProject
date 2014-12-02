@@ -248,6 +248,7 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 			    	
 			    }
 				
+				
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "mainScreen");
 				Crowcing.bomb.setVisible(true);
