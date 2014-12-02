@@ -15,14 +15,15 @@ import javax.swing.JPanel;
 //Constantly changing background to indicate moving
 public class RacingPanel extends JPanel implements Runnable{
 	private CarThread carThread;
-	//private Car car2 = new Car("car"+(2+""),7,8,9);
+//	private Car car1 = new Car("car"+(1+""),5,8,10);
+//	private Car car2 = new Car("car"+(2+""),7,8,9);
 	private CarThread carThread2;// = new CarThread(car2, 1);
 	private BombThread bombThread;
 	
 	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
-	private int[] position = new int[2], prevPosition = new int[2];
-	private int type = 0, odd = 0;
+	private int[] position = new int[2], prevPosition = new int[2], position2 = new int[2];
+	private int type = 0, odd = 0, type1 = 0, type2 = 0;
 	private final int len = 200;
 	private Polygon poly = new Polygon();
 	private Statistics s;// = new Statistics(carThread, carThread2);
@@ -45,20 +46,54 @@ public class RacingPanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g){
 		position[0] = carThread.getPositionX();
 		position[1] = carThread.getPositionY();
+		
+		position2[0] = carThread2.getPositionX();
+		position2[1] = carThread2.getPositionY();
+
+		type1 = mapPosition[position[0]][position[1]];
+		String carName=carThread.getCarName();
+		ImageIcon carImg = new ImageIcon("car/"+carName+"-" + type1 + ".png");
+		
+		type2 = mapPosition[position2[0]][position2[1]];		
+		String carName2=carThread2.getCarName();
+		ImageIcon carImg2 = new ImageIcon("car/"+carName2+"-" + type2 + ".png");
+		int size = (int) (len/2*1.5);
+		
+				
+		int x1, y1, x, y, pos0, pos1;
+		if (chosenID > opponentID){
+			x = position2[0] - position[0] + 1;
+			y = position2[1] - position[1] + 1;
+			x1 = 1;
+			y1 = 1;
+			pos0 = position[0];
+			pos1 = position[1];
+			type = type1;
+		}
+		else{
+			x = 1;
+			y = 1;
+			x1 = position[0] - position2[0] + 1;
+			y1 = position[1] - position2[1] + 1;
+			pos0 = position2[0];
+			pos1 = position2[1];
+			type = type2;
+		}
+		
 		for (int i = -1; i < 2; i++){
 			for (int j = -1; j < 2; j++){
-				type = mapPosition[position[0]+i][position[1]+j];
-//				System.out.println("X " + position[0] + " Y " + position[1]);
+				type = mapPosition[pos0+i][pos1+j];
+//				System.out.println("X " + position[0] + " Y " + pos1);
 //				System.out.println("YO" + type);
 				if(type == 0){
-					if(position[0] > 1 && position[0] < 49 && position[1] > 1 && position[1] < 49){
+					if(pos0 > 1 && pos0 < 49 && pos1 > 1 && pos1 < 49){
 						
 						//draw this shape
 						//*000
 						//**00
 						//***0						
-						if(mapPosition[position[0]+i][position[1]+j-1] == 8 || mapPosition[position[0]+i][position[1]+j-1] == 4 ||
-								mapPosition[position[0]+i+1][position[1]+j] == 8 || mapPosition[position[0]+i+1][position[1]+j] == 4){
+						if(mapPosition[pos0+i][pos1+j-1] == 8 || mapPosition[pos0+i][pos1+j-1] == 4 ||
+								mapPosition[pos0+i+1][pos1+j] == 8 || mapPosition[pos0+i+1][pos1+j] == 4){
 							
 							poly = new Polygon();
 							poly.addPoint((i+1)*len, (j+1)*len);
@@ -82,8 +117,8 @@ public class RacingPanel extends JPanel implements Runnable{
 						//0***
 						//00**
 						//000*
-						else if(mapPosition[position[0]+i][position[1]+j+1] == 8 || mapPosition[position[0]+i][position[1]+j+1] == 4 ||
-								mapPosition[position[0]+i-1][position[1]+j] == 8 || mapPosition[position[0]+i-1][position[1]+j] == 4){
+						else if(mapPosition[pos0+i][pos1+j+1] == 8 || mapPosition[pos0+i][pos1+j+1] == 4 ||
+								mapPosition[pos0+i-1][pos1+j] == 8 || mapPosition[pos0+i-1][pos1+j] == 4){
 							
 							poly = new Polygon();
 							poly.addPoint((i+1)*len, (j+1)*len);
@@ -103,8 +138,8 @@ public class RacingPanel extends JPanel implements Runnable{
 							continue;
 						}
 						
-						else if(mapPosition[position[0]+i][position[1]+j+1] == 6 || mapPosition[position[0]+i][position[1]+j+1] == 2 ||
-								mapPosition[position[0]+i+1][position[1]+j] == 6 || mapPosition[position[0]+i+1][position[1]+j] == 2){
+						else if(mapPosition[pos0+i][pos1+j+1] == 6 || mapPosition[pos0+i][pos1+j+1] == 2 ||
+								mapPosition[pos0+i+1][pos1+j] == 6 || mapPosition[pos0+i+1][pos1+j] == 2){
 							
 							poly = new Polygon();
 							poly.addPoint((i+1)*len, (j+2)*len);
@@ -123,8 +158,8 @@ public class RacingPanel extends JPanel implements Runnable{
 					        g.fillPolygon(poly);
 							continue;
 						}
-						else if(mapPosition[position[0]+i][position[1]+j-1] == 6 || mapPosition[position[0]+i][position[1]+j-1] == 2 ||
-								mapPosition[position[0]+i-1][position[1]+j] == 6 || mapPosition[position[0]+i-1][position[1]+j] == 2){
+						else if(mapPosition[pos0+i][pos1+j-1] == 6 || mapPosition[pos0+i][pos1+j-1] == 2 ||
+								mapPosition[pos0+i-1][pos1+j] == 6 || mapPosition[pos0+i-1][pos1+j] == 2){
 							
 							poly = new Polygon();
 							poly.addPoint((i+1)*len, (j+2)*len);
@@ -153,7 +188,7 @@ public class RacingPanel extends JPanel implements Runnable{
 					g.drawRect((i+1)*len, (j+1)*len, len, len);
 					g.fillRect((i+1)*len, (j+1)*len, len, len);
 					if(type == 1 || type == 5){
-						if ((position[0] + i + position[1] + j) % 2 == 0){
+						if ((pos0 + i + pos1 + j) % 2 == 0){
 							g.setColor(Color.WHITE);
 							poly = new Polygon();
 							poly.addPoint((i+1)*len + 20, (j+1)*len + len/2 - 10);
@@ -165,7 +200,7 @@ public class RacingPanel extends JPanel implements Runnable{
 						}
 					}
 					else if(type == 3 || type == 7){
-						if ((position[0] + i + position[1] + j) % 2 == 0){
+						if ((pos0 + i + pos1 + j) % 2 == 0){
 							g.setColor(Color.WHITE);
 							poly = new Polygon();
 							poly.addPoint((i+1)*len + len/2 - 10, (j+1)*len + 20);
@@ -177,7 +212,7 @@ public class RacingPanel extends JPanel implements Runnable{
 						}
 					}
 					else if(type == 2 || type == 6){
-						if ((position[0] + i) % 2 == 0){
+						if ((pos0 + i) % 2 == 0){
 							g.setColor(Color.WHITE);
 							poly = new Polygon();
 							poly.addPoint((i+2)*len - 60, (j+1)*len + 40);
@@ -189,7 +224,7 @@ public class RacingPanel extends JPanel implements Runnable{
 						}
 					}
 					else if(type == 4 || type == 8){
-						if ((position[0] + i) % 2 == 0){
+						if ((pos0 + i) % 2 == 0){
 							g.setColor(Color.WHITE);
 							poly = new Polygon();
 							poly.addPoint((i+1)*len + 40, (j+1)*len + 60);
@@ -208,26 +243,7 @@ public class RacingPanel extends JPanel implements Runnable{
 			}
 		}
 
-		type = mapPosition[position[0]][position[1]];
-		String carName=carThread.getCarName();
-		ImageIcon carImg = new ImageIcon("car/"+carName+"-" + type + ".png");
-		int size = (int) (len/2*1.5);
-		
-		int[] position2 = new int[2];
-		position2[0] = carThread2.getPositionX();
-		position2[1] = carThread2.getPositionY();
-		int type2 = 0;
-		
-		int x1, y1;
-		if (chosenID < opponentID){
-			x1 = position[0] - position2[0] + 1;
-			y1 = position[1] - position2[1] + 1;
-		}
-		else{
-			x1 = 1;
-			y1 = 1;
-		}
-		switch (type){
+		switch (type1){
 			case 1: 
 				g.drawImage(carImg.getImage(), x1*len, y1*(len-len/8), size, size, null);
 				break;
@@ -252,23 +268,6 @@ public class RacingPanel extends JPanel implements Runnable{
 			case 8: 
 				g.drawImage(carImg.getImage(), x1*len*3/2, y1*len, size, size, null);
 				break;
-		}
-		s.drawStatistics(g);
-		
-		
-			
-		type2 = mapPosition[position2[0]][position2[1]];
-		
-		String carName2=carThread2.getCarName();
-		ImageIcon carImg2 = new ImageIcon("car/"+carName2+"-" + type + ".png");
-		int x, y;
-		if (chosenID > opponentID){
-			x = position2[0] - position[0] + 1;
-			y = position2[1] - position[1] + 1;
-		}
-		else{
-			x = 1;
-			y = 1;
 		}
 		
 		switch (type2){
@@ -297,25 +296,34 @@ public class RacingPanel extends JPanel implements Runnable{
 			g.drawImage(carImg2.getImage(), x*len, y*(len + len/2), size, size, null);
 			break;
 		}
-	}	
+
+		s.drawStatistics(g);
+		
+		}	
 	
 	public void run(){
 		chosenID = CarChoosingPanel.chosenCarID;
 		opponentID = CarChoosingPanel.opponentCarID;
+//		chosenID = 2;
+//		opponentID = 1;
 		if (chosenID > opponentID){
 			carThread = new CarThread(CarChoosingPanel.chosenCar, 1);
+//			carThread = new CarThread(car1, 1);
 			carThread.start();
 			
 			carThread2 = new CarThread(CarChoosingPanel.opponentCar, 2);
+//			carThread2 = new CarThread(car2, 2);
 			carThread2.start();
 			s = new Statistics(carThread, carThread2,map);
 		}
 		else
 		{
 			carThread = new CarThread(CarChoosingPanel.opponentCar, 1);
+//			carThread = new CarThread(car1, 1);
 			carThread.start();
 			
 			carThread2 = new CarThread(CarChoosingPanel.chosenCar, 2);
+//			carThread2 = new CarThread(car2, 2);
 			carThread2.start();
 			s = new Statistics(carThread2, carThread,map);
 		}
@@ -324,13 +332,11 @@ public class RacingPanel extends JPanel implements Runnable{
 		bombThread = new BombThread();
 		bombThread.start();
 		
-		s = new Statistics(carThread, carThread2,map);
-
 		s.start();
 		while(true){
 			repaint();
 			try {
-				Thread.sleep(10);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -340,7 +346,8 @@ public class RacingPanel extends JPanel implements Runnable{
 					carThread2.getTotalDistanceTraveled()>=map.getIndexOfPosition().size() ){
 				Crowcing.resultPanel.setFinalRank(s.getRank());
 			}
-			if (chosenID > opponentID && carThread.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
+			if ((chosenID > opponentID && carThread.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1)) ||
+					(chosenID < opponentID && carThread2.getTotalDistanceTraveled() >= (map.getIndexOfPosition().size()-1))){
 				System.out.println("Finsh");
 				MainScreenPanel.chatPanel.setVisible(false);
 				MainScreenPanel.miniMapPanel.setVisible(false);
@@ -354,17 +361,6 @@ public class RacingPanel extends JPanel implements Runnable{
 				CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
 				cl.show(Crowcing.outerPanel, "result");
 				break;
-			}
-			else if (chosenID < opponentID && carThread2.getTotalDistanceTraveled()>=map.getIndexOfPosition().size()){
-				System.out.println("Finsh");
-				MainScreenPanel.chatPanel.setVisible(false);
-				MainScreenPanel.miniMapPanel.setVisible(false);
-
-				Crowcing.resultPanel.setLapTime(s.getLapTime());
-//				System.out.println("Rank: " + s.getRank());
-				Crowcing.resultPanel.repaint();
-//				Crowcing.resultPanel
-
 			}
 				//finish round
 				
