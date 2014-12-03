@@ -94,8 +94,8 @@ public class ChatPanel extends JPanel implements Observer{
     
     
     public ChatPanel() {
-        String server = Crowcing.ipAdress;
-//        String server = "10.120.112.100";
+        //String server = Crowcing.ipAdress;
+        String server = "172.20.10.2";
         int port =2232;
        // ChatAccess access = null;
         try {
