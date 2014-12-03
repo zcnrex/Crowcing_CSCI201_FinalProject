@@ -40,12 +40,15 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 		this.setLayout(null);
 		this.setVisible(true);
 		Crowcing.bomb = new JButton("BOMB!");
+		Crowcing.boost = new JButton("BOOST!");
 		//racingPanel.setPreferredSize(new Dimension(600,600));
 		Crowcing.bomb.setFont(new Font("Dialog", 1, 18));
+		Crowcing.boost.setFont(new Font("Dialog", 1, 18));
 		chatPanel.setBounds(600, 0, 200, 600);
 		miniMapPanel.setBounds(500, 0, 100, 100);
 		racingPanel.setBounds(0, 0, 800, 600);
 		Crowcing.bomb.setBounds(25, 525, 100, 25);
+		Crowcing.boost.setBounds(25, 450, 125, 25);
 		Crowcing.whitePanel.setBounds(0,0,800,600);
 		Crowcing.whitePanel.setBackground(Color.WHITE);
 		//whitePanel.setOpacity(0f);
@@ -53,6 +56,9 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 		id = (int)(Math.random()*(9999-1000+1)+1000);
 		
 		Socket s;
+		
+		
+		
 		try {
 			s = new Socket("localhost", 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));

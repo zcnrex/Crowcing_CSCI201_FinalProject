@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Polygon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ public class RacingPanel extends JPanel implements Runnable{
 //	private Car car2 = new Car("car"+(2+""),7,8,9);
 	private CarThread carThread2;// = new CarThread(car2, 1);
 	private BombThread bombThread;
-	
+	private BombThread bombThread2;
 	private Map map = new Map("map.txt");
 	private int[][] mapPosition = new int[50][50];
 	private int[] position = new int[2], prevPosition = new int[2], position2 = new int[2];
@@ -315,6 +317,13 @@ public class RacingPanel extends JPanel implements Runnable{
 //			carThread2 = new CarThread(car2, 2);
 			carThread2.start();
 			s = new Statistics(carThread, carThread2,map);
+			
+			Crowcing.boost.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					Crowcing.boost.setEnabled(false);
+					carThread.boostCurrentSpeed();
+				}
+			});
 		}
 		else
 		{
@@ -326,11 +335,21 @@ public class RacingPanel extends JPanel implements Runnable{
 //			carThread2 = new CarThread(car2, 2);
 			carThread2.start();
 			s = new Statistics(carThread2, carThread,map);
+			Crowcing.boost.addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					Crowcing.boost.setEnabled(false);
+					carThread2.boostCurrentSpeed();
+				}
+			});
 		}
 		
-
-		bombThread = new BombThread();
+		bombThread = new BombThread(carThread);
 		bombThread.start();
+
+		bombThread2 = new BombThread(carThread2);
+		bombThread2.start();
+		
+		
 		
 		s.start();
 		String rank = "";

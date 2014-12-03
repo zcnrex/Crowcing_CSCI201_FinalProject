@@ -26,6 +26,7 @@ public class Crowcing extends JFrame{
 	
 
 	public static JButton bomb;
+	public static JButton boost;
 	public static JPanel whitePanel = new JPanel();
 	
 	//public Crowcing(){
@@ -59,10 +60,12 @@ public class Crowcing extends JFrame{
 		lp.add(outerPanel, new Integer(200));
 		lp.add(MainScreenPanel.miniMapPanel, new Integer(300));
 		lp.add(bomb, new Integer(300));
+		lp.add(boost, new Integer(300));
 		lp.add(MainScreenPanel.chatPanel, new Integer(500));
 		lp.add(whitePanel, new Integer(600));
 		
 		bomb.setVisible(false);
+		boost.setVisible(false);
 		MainScreenPanel.miniMapPanel.setVisible(false);
 		MainScreenPanel.chatPanel.setVisible(false);
 		whitePanel.setVisible(false);
@@ -88,7 +91,7 @@ public class Crowcing extends JFrame{
 	
 	public static void main(String[] args) {
 		//System.out.println("IP address for server:");
-		String ip = "172.20.10.2";
+		String ip = "localhost";
 		//Scanner scan=new Scanner(System.in);
 		//String ip=scan.nextLine();
 		Crowcing crowcing = new Crowcing(ip);

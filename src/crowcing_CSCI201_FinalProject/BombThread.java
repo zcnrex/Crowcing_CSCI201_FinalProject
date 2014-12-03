@@ -14,9 +14,11 @@ public class BombThread extends Thread{
 	private PrintWriter pw;
 	private BufferedReader br;
 	public static Timer timer;
+	public CarThread ct;
 	
-	public BombThread(){
+	public BombThread(CarThread ct){
 		Socket s;
+		this.ct = ct;
 		try {
 			s = new Socket("localhost", 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -44,7 +46,7 @@ public class BombThread extends Thread{
 					if(!(Integer.valueOf(tokens[1]) == MainScreenPanel.id)){
 						Crowcing.whitePanel.setVisible(true);
 						timer.start();
-						
+						ct.reduceCurrentSpeed(10);
 					}
 					
 					

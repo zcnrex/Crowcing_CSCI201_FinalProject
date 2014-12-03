@@ -114,9 +114,12 @@ public class CarThread extends Thread
 		
 	}
 	
-	public void reduceCurrentTopSpeed(double speedReduced,int time)
+	public void reduceCurrentSpeed(double speedReduced)
 	{
-		currentTopSpeed-=speedReduced;
+		currentSpeed/=5;
+	}
+	public void boostCurrentSpeed(){
+		currentSpeed*=1.5;
 	}
 	
 	public void reduceCurrentAcceleration(double accelerationReduced,int time)

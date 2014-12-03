@@ -14,7 +14,8 @@ public class MiniMapPanel extends JPanel implements Runnable{
 	private JLabel label[][];//the GUI JLabel of every pixel, only used in MiniMapPanel 
 	//private CarThread selfCar=new CarThread(CarChoosingPanel.chosenCar,1);
 	//private CarThread selfCar;
-	
+	private BombThread bombThread;
+	private BombThread bombThread2;
 	
 	public MiniMapPanel()
 	{
@@ -90,12 +91,16 @@ public class MiniMapPanel extends JPanel implements Runnable{
 		selfCar.start();
 		otherCar.start();
 		
+		
+		
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 		// TODO Auto-generated method stub
 		//System.out.println(selfCar.getTotalDistanceTraveled()+" **** "+distacePerLap());
 		while (selfCar.getTotalDistanceTraveled()<distacePerLap() || otherCar.getTotalDistanceTraveled()<distacePerLap() )
