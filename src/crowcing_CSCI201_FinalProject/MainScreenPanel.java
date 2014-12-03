@@ -60,7 +60,7 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 		
 		
 		try {
-			s = new Socket("localhost", 2232);
+			s = new Socket("172.20.10.3", 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
 			pw = new PrintWriter(s.getOutputStream());
 			Crowcing.bomb.addActionListener(new ActionListener(){

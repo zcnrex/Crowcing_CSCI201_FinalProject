@@ -91,7 +91,7 @@ public class Crowcing extends JFrame{
 	
 	public static void main(String[] args) {
 		//System.out.println("IP address for server:");
-		String ip = "localhost";
+		String ip = "172.20.10.3";
 		//Scanner scan=new Scanner(System.in);
 		//String ip=scan.nextLine();
 		Crowcing crowcing = new Crowcing(ip);
