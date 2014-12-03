@@ -16,6 +16,7 @@ public class MiniMapPanel extends JPanel implements Runnable{
 	//private CarThread selfCar;
 	private BombThread bombThread;
 	private BombThread bombThread2;
+	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	
 	public MiniMapPanel()
 	{
@@ -105,22 +106,35 @@ public class MiniMapPanel extends JPanel implements Runnable{
 		//System.out.println(selfCar.getTotalDistanceTraveled()+" **** "+distacePerLap());
 		while (selfCar.getTotalDistanceTraveled()<distacePerLap() || otherCar.getTotalDistanceTraveled()<distacePerLap() )
 		{
+			if (RacingPanel.chosenID > RacingPanel.opponentID){
+				x1 = RacingPanel.carThread.getPositionX();
+				y1 = RacingPanel.carThread.getPositionY();
+				x2 = RacingPanel.carThread2.getPositionX();
+				y2 = RacingPanel.carThread2.getPositionY();
+			}
+			else{
+				x1 = RacingPanel.carThread2.getPositionX();
+				y1 = RacingPanel.carThread2.getPositionY();
+				x2 = RacingPanel.carThread.getPositionX();
+				y2 = RacingPanel.carThread.getPositionY();
+				
+			}
 			if (selfCar.getTotalDistanceTraveled()<distacePerLap())
 			{
-				int x=selfCar.getPositionX();
-				int y=selfCar.getPositionY();
-				System.out.println(x+" **** "+y);
-				System.out.println(map[y][x]+" **** "+selfCar.getCarName()+"  "+label.length);
+//				int x=selfCar.getPositionX();
+//				int y=selfCar.getPositionY();
+				System.out.println(x1+" **** "+y1);
+				System.out.println(map[y1][x1]+" **** "+selfCar.getCarName()+"  "+label.length);
 				
-				label[y][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x],1));
-				label[y][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x+1],1));
-				label[y+1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x],1));
-				label[y-1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x],1));
-				label[y][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x-1],1));
-				label[y-1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x-1],1));
-				label[y+1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x+1],1));
-				label[y+1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x-1],1));
-				label[y-1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x+1],1));
+				label[y1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1],1));
+				label[y1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1+1],1));
+				label[y1+1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1],1));
+				label[y1-1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1],1));
+				label[y1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1-1],1));
+				label[y1-1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1-1],1));
+				label[y1+1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1+1],1));
+				label[y1+1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1-1],1));
+				label[y1-1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1+1],1));
 				
 				int sleepTime=(int)(5000/selfCar.getCurrentSpeed());
 				try {
@@ -130,33 +144,33 @@ public class MiniMapPanel extends JPanel implements Runnable{
 					e.printStackTrace();
 				}
 				
-				label[y][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x],0));
-				label[y][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x+1],0));
-				label[y+1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x],0));
-				label[y-1][x].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x],0));
-				label[y][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y][x-1],0));
-				label[y-1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x-1],0));
-				label[y+1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x+1],0));
-				label[y+1][x-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y+1][x-1],0));
-				label[y-1][x+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y-1][x+1],0));
+				label[y1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1],0));
+				label[y1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1+1],0));
+				label[y1+1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1],0));
+				label[y1-1][x1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1],0));
+				label[y1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1][x1-1],0));
+				label[y1-1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1-1],0));
+				label[y1+1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1+1],0));
+				label[y1+1][x1-1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1+1][x1-1],0));
+				label[y1-1][x1+1].setIcon(new DrawCarOnMap(selfCar.getCarName(),map[y1-1][x1+1],0));
 			}
 			
 			if (otherCar.getTotalDistanceTraveled()<distacePerLap())
 			{
-				int x=otherCar.getPositionX();
-				int y=otherCar.getPositionY();
-				System.out.println(x+" **** "+y);
-				System.out.println(map[y][x]+" **** "+otherCar.getCarName()+"  "+label.length);
+//				int x=otherCar.getPositionX();
+//				int y=otherCar.getPositionY();
+				System.out.println(x2+" **** "+y2);
+				System.out.println(map[y2][x2]+" **** "+otherCar.getCarName()+"  "+label.length);
 				
-				label[y][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x],1));
-				label[y][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x+1],1));
-				label[y+1][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x],1));
-				label[y-1][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x],1));
-				label[y][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x-1],1));
-				label[y-1][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x-1],1));
-				label[y+1][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x+1],1));
-				label[y+1][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x-1],1));
-				label[y-1][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x+1],1));
+				label[y2][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2],1));
+				label[y2][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2+1],1));
+				label[y2+1][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2],1));
+				label[y2-1][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2],1));
+				label[y2][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2-1],1));
+				label[y2-1][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2-1],1));
+				label[y2+1][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2+1],1));
+				label[y2+1][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2-1],1));
+				label[y2-1][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2+1],1));
 				
 				int sleepTime=(int)(5000/otherCar.getCurrentSpeed());
 				try {
@@ -166,15 +180,15 @@ public class MiniMapPanel extends JPanel implements Runnable{
 					e.printStackTrace();
 				}
 				
-				label[y][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x],0));
-				label[y][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x+1],0));
-				label[y+1][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x],0));
-				label[y-1][x].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x],0));
-				label[y][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y][x-1],0));
-				label[y-1][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x-1],0));
-				label[y+1][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x+1],0));
-				label[y+1][x-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y+1][x-1],0));
-				label[y-1][x+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y-1][x+1],0));
+				label[y2][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2],0));
+				label[y2][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2+1],0));
+				label[y2+1][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2],0));
+				label[y2-1][x2].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2],0));
+				label[y2][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2][x2-1],0));
+				label[y2-1][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2-1],0));
+				label[y2+1][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2+1],0));
+				label[y2+1][x2-1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2+1][x2-1],0));
+				label[y2-1][x2+1].setIcon(new DrawCarOnMap(otherCar.getCarName(),map[y2-1][x2+1],0));
 			}
 			
 			

@@ -16,10 +16,10 @@ import javax.swing.JPanel;
 //One car or two?
 //Constantly changing background to indicate moving
 public class RacingPanel extends JPanel implements Runnable{
-	private CarThread carThread;
+	public static CarThread carThread;
 //	private Car car1 = new Car("car"+(1+""),5,8,10);
 //	private Car car2 = new Car("car"+(2+""),7,8,9);
-	private CarThread carThread2;// = new CarThread(car2, 1);
+	public static CarThread carThread2;// = new CarThread(car2, 1);
 	private BombThread bombThread;
 	private BombThread bombThread2;
 	private Map map = new Map("map.txt");
@@ -29,7 +29,7 @@ public class RacingPanel extends JPanel implements Runnable{
 	private final int len = 200;
 	private Polygon poly = new Polygon();
 	private Statistics s;// = new Statistics(carThread, carThread2);
-	private int chosenID, opponentID;
+	public static int chosenID, opponentID;
 
 	
 	public RacingPanel( ){
@@ -343,11 +343,11 @@ public class RacingPanel extends JPanel implements Runnable{
 			});
 		}
 		
-		bombThread = new BombThread(carThread);
+		bombThread = new BombThread(carThread, carThread2);
 		bombThread.start();
 
-		bombThread2 = new BombThread(carThread2);
-		bombThread2.start();
+//		bombThread2 = new BombThread(carThread2);
+//		bombThread2.start();
 		
 		
 		
@@ -372,7 +372,7 @@ public class RacingPanel extends JPanel implements Runnable{
 				System.out.println("Finsh");
 				MainScreenPanel.miniMapPanel.setVisible(false);
 				MainScreenPanel.chatPanel.setVisible(false);
-
+				Crowcing.boost.setVisible(false);
 				Crowcing.bomb.setVisible(false);
 				
 

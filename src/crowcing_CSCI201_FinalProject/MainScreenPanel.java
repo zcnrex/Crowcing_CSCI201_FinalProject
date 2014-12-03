@@ -68,6 +68,12 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 					pw.println("BOMB!" + id);
 					pw.flush();
 //					Crowcing.whitePanel.setVisible(true);
+					if (RacingPanel.chosenID > RacingPanel.opponentID){
+						RacingPanel.carThread2.reduceCurrentSpeed(10);
+					}
+					else{
+						RacingPanel.carThread.reduceCurrentSpeed(10);
+					}
 					Crowcing.bomb.setEnabled(false);
 //					timer.start();
 					cooldown.start();

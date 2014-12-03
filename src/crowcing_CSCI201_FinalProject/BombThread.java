@@ -14,11 +14,12 @@ public class BombThread extends Thread{
 	private PrintWriter pw;
 	private BufferedReader br;
 	public static Timer timer;
-	public CarThread ct;
+	public CarThread ct1, ct2;
 	
-	public BombThread(CarThread ct){
+	public BombThread(CarThread ct1, CarThread ct2){
 		Socket s;
-		this.ct = ct;
+		this.ct1 = ct1;
+		this.ct2 = ct2;
 		try {
 			s = new Socket("localhost", 2232);
 			br = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -46,7 +47,12 @@ public class BombThread extends Thread{
 					if(!(Integer.valueOf(tokens[1]) == MainScreenPanel.id)){
 						Crowcing.whitePanel.setVisible(true);
 						timer.start();
-						ct.reduceCurrentSpeed(10);
+						if(RacingPanel.chosenID > RacingPanel.opponentID){
+							ct1.reduceCurrentSpeed(10);
+						}
+						else {
+							ct2.reduceCurrentSpeed(10);
+						}
 					}
 					
 					
