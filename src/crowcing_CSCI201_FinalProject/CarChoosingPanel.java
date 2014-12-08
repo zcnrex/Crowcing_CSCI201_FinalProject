@@ -193,18 +193,6 @@ public class CarChoosingPanel extends JPanel implements Runnable{
 				chosenCarID=userNo;
 				pw.println(userNo+" is using car"+(carNumSelect+1));
 				
-//				JDialog jj= new JDialog();
-//				
-//				jj.setLocationRelativeTo(Crowcing.outerPanel);
-//				//jj.setLayout(new BorderLayout());
-//				jj.setSize(500, 100);
-//				jj.setModal(true);
-//				JLabel label=new JLabel("Waiting for another user..");
-//				label.setFont(new Font("Dialog",   1,   16));
-//				
-//				
-//				jj.add(label);
-//				jj.setVisible(true);
 //				
                
                

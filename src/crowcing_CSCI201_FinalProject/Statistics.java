@@ -28,9 +28,6 @@ public class Statistics extends Thread{
 		
 		int percent=(int)((self.getTotalDistanceTraveled()*100/map.distancePerLap()));
 		g.drawString("Match Finished: "+percent+"%", 10, 110);
-//		g.drawString("Your Position: " + self.getTotalDistanceTraveled(), 10, 90);
-
-//		g.drawString("Rival's Position: " + rival.getTotalDistanceTraveled(), 10, 110);
 	}
 	
 	//Calculate

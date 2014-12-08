@@ -33,16 +33,6 @@ public class MiniMapPanel extends JPanel implements Runnable{
 		label=newMap.getLabel();
 		indexOfPosition=newMap.getIndexOfPosition();
 				
-		/*for (int i=0;i<50;i++)
-		{
-			for (int j=0;j<50;j++)
-			{
-				System.out.print(map[i][j]+" ");
-			}
-			System.out.println(i);
-		}
-		
-		System.out.println(label.length+"  "+label[49].length);*/
 		
 		for (int i=0;i<50;i++)
 		{
@@ -82,9 +72,6 @@ public class MiniMapPanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 		
-		//Car car=new Car("car"+(1+""),7,8,9);
-		//Car car=new Car("car"+(2+""),8,9,7);
-		//Car car=new Car("car"+(3+""),9,7,8);
 		
 		//selfCar=new CarThread(car,1);
 		CarThread selfCar=new CarThread(CarChoosingPanel.chosenCar,1);

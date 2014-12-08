@@ -268,14 +268,6 @@ public class LoginPanel extends JPanel implements Runnable{
 			loginButton = new JButton("Login");
 			loginButton.setBounds(250, 150, 100, 50);
 			
-//			loginButton.addActionListener(new ActionListener()///change JPanel to CarChoosing Panel
-//			{
-//				public void actionPerformed(ActionEvent ae){
-////					changePanel(initialPanel, registerPanel);
-//					CardLayout cl = (CardLayout)Crowcing.outerPanel.getLayout();
-//					cl.show(Crowcing.outerPanel, "chooseCar");
-//				}
-//			});
 			
 			loginButton.addActionListener(new SendText(userNameField, passwordField, "Existing"));
 			System.out.println(userNameField.getText() +" "+ passwordField.getText());

@@ -30,36 +30,6 @@ public class ResultPanel extends JPanel{
 		public ResultPanel(){
 		setSize(800,600);
 		setLayout(null);
-//		backgroundLabel = new JLabel();
-//		backgroundLabel.setIcon(backgroundImage);
-//		backgroundLabel.setBounds(0, 0, 800, 600);
-//		backgroundLabel.setOpaque(true);
-//		add(backgroundLabel);
-		repaint();
-		
-//		JLfinalRank = new JLabel("Final Rank: " + rank);
-//		JLfinalRank.setForeground(Color.WHITE);
-//		JLfinalRank.setBackground(Color.BLACK);
-//		JLfinalRank.setOpaque(true);
-//		JLfinalRank.setFont(new Font("Dialog", 1, 24));
-//		JLfinalRank.setBounds(300, 120, 200, 30);
-//		add(JLfinalRank);
-//		
-//		JLbestLap = new JLabel("Best Lap Time: " + lapTime);
-//		JLbestLap.setForeground(Color.WHITE);
-//		JLbestLap.setBackground(Color.BLACK);
-//		JLbestLap.setOpaque(true);
-//		JLbestLap.setFont(new Font("Dialog", 1, 24));
-//		JLbestLap.setBounds(300, 180, 250, 30);
-//		add(JLbestLap);
-//		
-//		JLtotalLap = new JLabel("Total Lap Time: " + String.valueOf(1));
-//		JLtotalLap.setForeground(Color.WHITE);
-//		JLtotalLap.setBackground(Color.BLACK);
-//		JLtotalLap.setOpaque(true);
-//		JLtotalLap.setFont(new Font("Dialog", 1, 24));
-//		JLtotalLap.setBounds(300, 240, 250, 30);
-//		add(JLtotalLap);
 		
 		JBrematch = new JButton("Rematch");
 		JBrematch.setFont(new Font("Dialog", 1, 24));

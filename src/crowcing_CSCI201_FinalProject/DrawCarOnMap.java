@@ -80,50 +80,6 @@ public class DrawCarOnMap implements Icon {
 		    }
 		    
 		    
-		    
-
-//		    if (visible==1)
-//		    {
-//		    	Car cc=car.get(carNum);
-//		    	
-//		    		if (cc.color.equals("red"))
-//		    		{
-//		    			g.setColor(Color.RED);
-//		    		}
-//		    		else if (cc.color.equals("blue"))
-//		    		{
-//		    			g.setColor(Color.BLUE);
-//		    		}
-//		    		else if (cc.color.equals("yellow"))
-//		    		{
-//		    			g.setColor(Color.YELLOW);
-//		    		}
-//		    		else if (cc.color.equals("orange"))
-//		    		{
-//		    			g.setColor(Color.ORANGE);
-//		    		}
-//		    		else if (cc.color.equals("green"))
-//		    		{
-//		    			g.setColor(Color.GREEN);
-//		    		}
-//		    		g.drawOval(15, 15,30, 30);
-//		    		g.fillOval(15, 15,30, 30);
-//		    		g.setColor(Color.BLACK);
-//		    		g.drawString(""+(carNum+1), 30, 30);
-//
-//		    }
-//		    	else if (visible==0)
-//		    	{
-//		    		
-//		    	}
-		    
-		    	
-		   
-		    
-		   
-		   // g.setColor(color);
-		    //g.fillRect(x + borderWidth, y + borderWidth, getIconWidth() - 2 * borderWidth,
-		       // getIconHeight() - 2 * borderWidth);
 
 	}
 

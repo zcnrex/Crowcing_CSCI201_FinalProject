@@ -132,11 +132,6 @@ public class Map {
 			indexOfPosition.add(temp1);
 		}
 		
-		/*System.out.println(indexOfPosition.size()+"!!!");
-		for (int i=0;i<indexOfPosition.size();i++)
-		{
-			System.out.println(indexOfPosition.get(i).get(0)+"  "+indexOfPosition.get(i).get(1));
-		}*/
 		
 	}
 

@@ -84,13 +84,6 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 			e1.printStackTrace();
 		}
 		
-//		timer = new Timer(1000, new ActionListener(){
-//			public void actionPerformed(ActionEvent e){
-//				Crowcing.whitePanel.setVisible(false);
-//				((Timer)e.getSource()).stop();
-//			}
-//		});
-		
 		cooldown = new Timer(10000, new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				Crowcing.bomb.setEnabled(true);
@@ -98,7 +91,6 @@ public class MainScreenPanel extends JPanel implements Runnable// contain ChatPa
 			}
 		});
 		
-		//Thread t = new Thread(racingPanel);
 		
 		
 		this.add(racingPanel);
